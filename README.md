@@ -22,5 +22,7 @@ python3 automater.py
 # Versions:
 
 Version 1 (27/08/2020):
+
   added deauth attack
+  
   added nikto vulnerability scanner
