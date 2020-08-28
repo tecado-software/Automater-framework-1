@@ -1,4 +1,7 @@
-aircrack-ng
-nikto
 metagoofil
 whois
+dmitry (deep magic)
+hping3
+nikto
+wafw00f
+aircrack-ng
