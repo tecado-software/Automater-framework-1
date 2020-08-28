@@ -9,7 +9,7 @@ git clone https://github.com/MattiaG-afk/Automater.git
 
 Change the permission of the file:
 
-chmod +x automater.py installer.py
+chmod +x automater.py installer.py updater.py
 
 Install the dependency (if you aren't using a Linux OS with apt as package manager there is the dependecy.txt):
 
@@ -38,3 +38,9 @@ Version 1.2.0 (28/08/2020):
   added updater
   
   added tool: whois
+
+Version 1.3.0 (28/08/2020):
+
+  added tool: hping3
+  
+  added tool: dmitry (deep magic)
