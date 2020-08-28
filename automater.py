@@ -7,7 +7,7 @@ def welcome():
         print("    _         _                        _            ")
         print("   / \  _   _| |_ ___  _ __ ___   __ _| |_ ___ _ __ ")
         print("  / _ \| | | | __/ _ \| '_ ` _ \ / _` | __/ _ \ '__|")
-        print(" / ___ \ |_| | || (_) | | | | | | (_| | ||  __/ |   v.1.2.0")
+        print(" / ___ \ |_| | || (_) | | | | | | (_| | ||  __/ |   v.1.3.0")
         print("/_/   \_\__,_|\__\___/|_| |_| |_|\__,_|\__\___|_|   By @Kr0n0s")
         print()
     if var == 1:
@@ -16,24 +16,24 @@ def welcome():
         print(" #   #  #    #   #   #    # ##  ##  #  #    #   #      #    # ")
         print("#     # #    #   #   #    # # ## # #    #   #   #####  #    # ")
         print("####### #    #   #   #    # #    # ######   #   #      #####  ")
-        print("#     # #    #   #   #    # #    # #    #   #   #      #   #  v.1.2.0")
+        print("#     # #    #   #   #    # #    # #    #   #   #      #   #  v.1.3.0")
         print("#     #  ####    #    ####  #    # #    #   #   ###### #    # By @Kr0n0s")
     if var == 2:
         print("               _                        _            ")
         print("    /\        | |                      | |           ")
         print("   /  \  _   _| |_ ___  _ __ ___   __ _| |_ ___ _ __ ")
         print("  / /\ \| | | | __/ _ \| '_ ` _ \ / _` | __/ _ \ '__|")
-        print(" / ____ \ |_| | || (_) | | | | | | (_| | ||  __/ |   v.1.2.0")
+        print(" / ____ \ |_| | || (_) | | | | | | (_| | ||  __/ |   v.1.3.0")
         print("/_/    \_\__,_|\__\___/|_| |_| |_|\__,_|\__\___|_|   By @Kr0n0s")
     if var == 3:
         print("    \          |                         |             ")
         print("   _ \   |   | __|  _ \  __ `__ \   _` | __|  _ \  __| ")
-        print("  ___ \  |   | |   (   | |   |   | (   | |    __/ |   v.1.2.0")
+        print("  ___ \  |   | |   (   | |   |   | (   | |    __/ |   v.1.3.0")
         print("_/    _\\__,_|\__|\___/ _|  _|  _|\__,_|\__|\___|_|   By @Kr0n0s ")
     if var == 4:
         print("   _       _                  _           ")
         print("  /_\ _  _| |_ ___ _ __  __ _| |_ ___ _ _ ")
-        print(" / _ \ || |  _/ _ \ '  \/ _` |  _/ -_) '_| v.1.2.0")
+        print(" / _ \ || |  _/ _ \ '  \/ _` |  _/ -_) '_| v.1.3.0")
         print("/_/ \_\_,_|\__\___/_|_|_\__,_|\__\___|_|   By @Kr0n0s")
 
 def help():
@@ -46,8 +46,11 @@ def help():
     print("\tInformation gathering:")
     print("\t\tmetagoofil ==> Collects gathering metadata")
     print("\t\twhois ==> Provide names, physical address, phone number, etc... of a domain")
+    print("\t\tdeep magic ==> Set of tools for information gathering")
+    print("\t\thping3 ==> Detect if the target is alive")
     print("\tScanner:")
     print("\t\tnikto ==> Make a vulnerability scanner")
+    print("\t\twafw00f ==> Scan for web application firewall")
     print("\tWi-Fi:")
     print("\t\tdeauth ==> Make a deauth attack")
     print("\texit ==> Exit the framework")
@@ -90,6 +93,36 @@ def metagoofil():
             print("Exiting from module: metagoofil")
             break
 
+def deep_magic():
+    print("You have chosen the module: deep magic")
+    domain = ""
+    while True:
+        command = str(input("#deep magic>>>"))
+        if command.startswith("help") or command.endswith("help"):
+            print("This all-in-one tool include some of the most important tool (whois, netcraft, ecc...) for information gathering")
+            print("\thelp ==> Show this help message")
+            print("\tdomain ==> Set the domain to scan")
+            print("\tshow values ==> Show the current value of the variables")
+            print("\texecute ==> Start the tool")
+            print("\tback ==> Go back to the main menu")
+        if command.startswith("domain") or command.endswith("domain"):
+            domain1 = command.replace("domain", "")
+            domain = domain1.replace(" ", "")
+            print("domain ==>", domain)
+        if command.startswith("show values") or command.endswith("show values"):
+            print("domain ==>", domain)
+        if command.startswith("execute") or command.endswith("execute"):
+            shell1 = "dmitry -winsepfb " + domain
+            try:
+                subprocess.run(shell1, shell=True)
+            except:
+                print("There is some trouble...")
+                print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                print("Are you running this script on Linux?")
+        if command.startswith("back") or command.endswith("back"):
+            print("Exiting from module: deep magic")
+            break
+
 def whois():
     print("You have chosen the module: whois")
     domain = ""
@@ -101,7 +134,7 @@ def whois():
             print("\thelp ==> Show this help message")
             print("\tdomain ==> Set the domain address")
             print("\tshow values ==> Show the current value of the variables")
-            print("\texecute ==> Stert the tool")
+            print("\texecute ==> Start the tool")
             print("\tback ==> Go back to the main menu")
         if command.startswith("domain") or command.endswith("domain"):
             domain1 = command.replace("domain", "")
@@ -121,6 +154,68 @@ def whois():
             print("Exiting from module: whois")
             break
 
+def hping3():
+    print("You have chosen the module: hping3")
+    interface = ""
+    target = ""
+    mode = ""
+    while True:
+        command = str(input("#hping3>>>"))
+        if command.startswith("help") or command.endswith("help"):
+            print("This module check if target is alive")
+            print("Available commands:")
+            print("\thelp ==> Show this help message")
+            print("\tinterface ==> Set the interface")
+            print("\ttarget ==> Set the target host")
+            print("\tmode ==> Set the mode (raw ip, icmp and udp)")
+            print("\tflood ==> Do a DOS attack? (true or false)")
+            print("\tshow values ==> Show the current value of the variables")
+            print("\texecute ==> Start the tool")
+            print("\tback ==> Go back to the main menu")
+        if command.startswith("interface") or command.endswith("interface"):
+            interface1 = command.replace("interface", "")
+            interface = interface1.replace(" ", "")
+            print("interface ==>", interface)
+        if command.startswith("target") or command.endswith("target"):
+            target1 = command.replace("target", "")
+            target = target1.replace(" ", "")
+            print("target ==>", target)
+        if command.startswith("mode") or command.endswith("mode"):
+            mode1 = command.replace("mode", "")
+            mode = mode1.replace(" ", "")
+            print("mode ==>", mode)
+            if not(mode == "raw ip" or mode == "icmp" or mode == "udp"):
+                print("Invalid mode!")
+                mode = ""
+        if command.startswith("flood") or command.endswith("flood"):
+            aflood1 = command.replace("flood", "")
+            aflood = aflood1.replace(" ", "")
+            if aflood == "true":
+                flood = True
+            else:
+                flood = False
+            print("flood ==>", flood)
+        if command.startswith("show values") or command.endswith("show values"):
+            print("interface ==>", interface)
+            print("target ==>", target)
+            print("mode ==>", mode)
+            print("flood ==>", flood)
+        if command.startswith("execute") or command.endswith("execute"):
+            if mode == "raw ip":
+                vmode = "0"
+            elif mode == "icmp":
+                vmode = "1"
+            elif mode == "udp":
+                vmode = "2"
+            if flood == True:
+                shell1 = "hping3 -" + vmode + " -I " + interface + " " + target + " --flood"
+            else:
+                shell1 = "hping3 -" + vmode + " -I " + interface + " " + target
+            subprocess.run(shell1, shell=True)
+        if command.startswith("back") or command.endswith("back"):
+            print("Exiting from module: hping3")
+            break
+
 def nikto():
     print("You have chosen the module: nikto")
     target = ""
@@ -128,6 +223,7 @@ def nikto():
         command = str(input("#nikto>>>"))
         if command.startswith("help") or command.endswith("help"):
             print("This module make a scan of the target with the aim of finding vulnerabilities")
+            print("Available commands:")
             print("\thelp ==> Show this help message")
             print("\ttarget ==> Set the target host")
             print("\tshow values ==> Show the current value of the variables")
@@ -136,7 +232,7 @@ def nikto():
         if command.startswith("target") or command.endswith("target"):
             target1 = command.replace("target", "")
             target = target1.replace(" ", "")
-            print("target =>", target)
+            print("target ==>", target)
         if command.startswith("execute") or command.endswith("execute"):
             shell1 = "nikto -host " + target
             try:
@@ -146,9 +242,40 @@ def nikto():
                 print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
                 print("Are you running this script on Linux?")
         if command.startswith("show values") or command.endswith("show value"):
-            print("target =>", target)
+            print("target ==>", target)
         if command.startswith("back") or command.endswith("back"):
             print("Exiting from module: nikto")
+            break
+
+def wafw00f():
+    print("You have chosen the module: wafw00f")
+    domain = ""
+    while True:
+        command = str(input("#wafw00f>>>"))
+        if command.startswith("help") or command.endswith("help"):
+            print("This module scan a domain with the aim of find a Web Application Firewall (WAF)")
+            print("Available commands:")
+            print("\thelp ==> Show this help message")
+            print("\tdomain ==> Set the domain to scan")
+            print("\tshow values ==> Show the current value of the variables")
+            print("\texecute ==> Start the scanner")
+            print("\tback ==> Go back to the main menu")
+        if command.startswith("domain") or command.endswith("domain"):
+            domain1 = command.replace("domain", "")
+            domain = domain1.replace(" ", "")
+            print("domain ==>", domain)
+        if command.startswith("show values") or command.endswith("show values"):
+            print("domain ==>", domain)
+        if command.startswith("execute") or command.endswith("execute"):
+            shell1 = "wafw00f " + domain
+            try:
+                subprocess.run(shell1, shell=True)
+            except:
+                print("There is some trouble...")
+                print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                print("Are you running this script on Linux?")
+        if command.startswith("back") or command.endswith("back"):
+            print("Exiting from module: wafw00f")
             break
 
 def deauth():
@@ -164,6 +291,7 @@ def deauth():
             print("This module make a deauth attack")
             print("Before you use this module you have to run, in another terminal, \"airmon-ng start wlan0\" and then \"airodump-ng wlan0\"")
             print("when you see your victim hit Ctrl-C and enter the command \"airmon-ng stop wlan0mon\". This allows you to get what you need")
+            print("Available commands:")
             print("\thelp ==> Show this message")
             print("\tinterface ==> Select the interface (not in monitor mode)")
             print("\tbssid ==> Set the bssid of the vicitim (you find it in the column: BSSID)")
@@ -176,25 +304,25 @@ def deauth():
         if command.startswith("interface") or command.endswith("interface"):
             interface1 = command.replace("interface", "")
             interface = interface1.replace(" ", "")
-            print("interface =>", interface)
+            print("interface ==>", interface)
         if command.startswith("bssid") or command.endswith("bssid"):
             bssid1 = command.replace("bssid", "")
             bssid = bssid1.replace(" ", "")
-            print("bssid =>", bssid)
+            print("bssid ==>", bssid)
         if command.startswith("mac") or command.endswith("mac"):
             mac1 = command.replace("mac", "")
             mac = mac1.replace(" ", "")
-            print("mac =>", mac)
+            print("mac ==>", mac)
         if command.startswith("number") or command.endswith("number"):
             number1 = command.replace("number", "")
             number = number1.replace(" ", "")
-            print("number =>", number)
+            print("number ==>", number)
         if command.startswith("channel") or command.endswith("channel"):
             channel1 = command.replace("channel", "")
             channel = channel1.replace(" ", "")
-            print("channel =>", channel)
+            print("channel ==>", channel)
         if command.startswith("show values") or command.endswith("show value"):
-            print("interface =>", interface)
+            print("interface ==>", interface)
             print("bssid ==>", bssid)
             print("mac ==>", mac)
             print("number ==>", number)
@@ -223,10 +351,16 @@ while True:
         metagoofil()
     if command.startswith("whois") or command.endswith("whois"):
         whois()
+    if command.startswith("deep magic") or command.endswith("deep magic"):
+        deep_magic()
+    if command.startswith("hping3") or command.endswith("hping3"):
+        hping3()
     if command.startswith("deauth") or command.endswith("deauth"):
         deauth()
     if command.startswith("nikto") or command.endswith("nikto"):
         nikto()
+    if command.startswith("wafw00f") or command.endswith("wafw00f"):
+        wafw00f()
     if command.startswith("exit") or command.endswith("exit"):
         print("See you at the next hack ;-)")
         break
