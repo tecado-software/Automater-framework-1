@@ -21,8 +21,20 @@ python3 automater.py
 
 # Versions:
 
-Version 1 (27/08/2020):
+Version 1.0.0 (27/08/2020):
 
-  added deauth attack
+  added tool: deauth attack
   
-  added nikto vulnerability scanner
+  added tool: nikto vulnerability scanner
+
+Version 1.1.0 (28/08/2020):
+
+  added installer
+  
+  added tool: metagoofil 
+  
+Version 1.2.0 (28/08/2020):
+
+  added updater
+  
+  added tool: whois
