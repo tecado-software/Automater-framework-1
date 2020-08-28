@@ -1,2 +1,4 @@
 aircrack-ng
 nikto
+metagoofil
+whois
