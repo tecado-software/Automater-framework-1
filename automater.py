@@ -7,7 +7,7 @@ def welcome():
         print("    _         _                        _            ")
         print("   / \  _   _| |_ ___  _ __ ___   __ _| |_ ___ _ __ ")
         print("  / _ \| | | | __/ _ \| '_ ` _ \ / _` | __/ _ \ '__|")
-        print(" / ___ \ |_| | || (_) | | | | | | (_| | ||  __/ |   v.1.0.0")
+        print(" / ___ \ |_| | || (_) | | | | | | (_| | ||  __/ |   v.1.2.0")
         print("/_/   \_\__,_|\__\___/|_| |_| |_|\__,_|\__\___|_|   By @Kr0n0s")
         print()
     if var == 1:
@@ -16,24 +16,24 @@ def welcome():
         print(" #   #  #    #   #   #    # ##  ##  #  #    #   #      #    # ")
         print("#     # #    #   #   #    # # ## # #    #   #   #####  #    # ")
         print("####### #    #   #   #    # #    # ######   #   #      #####  ")
-        print("#     # #    #   #   #    # #    # #    #   #   #      #   #  v.1.0.0")
+        print("#     # #    #   #   #    # #    # #    #   #   #      #   #  v.1.2.0")
         print("#     #  ####    #    ####  #    # #    #   #   ###### #    # By @Kr0n0s")
     if var == 2:
         print("               _                        _            ")
         print("    /\        | |                      | |           ")
         print("   /  \  _   _| |_ ___  _ __ ___   __ _| |_ ___ _ __ ")
         print("  / /\ \| | | | __/ _ \| '_ ` _ \ / _` | __/ _ \ '__|")
-        print(" / ____ \ |_| | || (_) | | | | | | (_| | ||  __/ |   v.1.0.0")
+        print(" / ____ \ |_| | || (_) | | | | | | (_| | ||  __/ |   v.1.2.0")
         print("/_/    \_\__,_|\__\___/|_| |_| |_|\__,_|\__\___|_|   By @Kr0n0s")
     if var == 3:
         print("    \          |                         |             ")
         print("   _ \   |   | __|  _ \  __ `__ \   _` | __|  _ \  __| ")
-        print("  ___ \  |   | |   (   | |   |   | (   | |    __/ |   v.1.0.0")
+        print("  ___ \  |   | |   (   | |   |   | (   | |    __/ |   v.1.2.0")
         print("_/    _\\__,_|\__|\___/ _|  _|  _|\__,_|\__|\___|_|   By @Kr0n0s ")
     if var == 4:
         print("   _       _                  _           ")
         print("  /_\ _  _| |_ ___ _ __  __ _| |_ ___ _ _ ")
-        print(" / _ \ || |  _/ _ \ '  \/ _` |  _/ -_) '_| v.1.0.0")
+        print(" / _ \ || |  _/ _ \ '  \/ _` |  _/ -_) '_| v.1.2.0")
         print("/_/ \_\_,_|\__\___/_|_|_\__,_|\__\___|_|   By @Kr0n0s")
 
 def help():
@@ -91,7 +91,35 @@ def metagoofil():
             break
 
 def whois():
-    pass
+    print("You have chosen the module: whois")
+    domain = ""
+    while True:
+        command = str(input("#whois>>>"))
+        if command.startswith("help") or command.endswith("help"):
+            print("This tool provide names, physical address, phone number, etc... of a given domain")
+            print("Available commands:")
+            print("\thelp ==> Show this help message")
+            print("\tdomain ==> Set the domain address")
+            print("\tshow values ==> Show the current value of the variables")
+            print("\texecute ==> Stert the tool")
+            print("\tback ==> Go back to the main menu")
+        if command.startswith("domain") or command.endswith("domain"):
+            domain1 = command.replace("domain", "")
+            domain = domain1.replace(" ", "")
+            print("domain ==>", domain)
+        if command.startswith("show values") or command.endswith("show values"):
+            print("domain ==>", domain)
+        if command.startswith("execute") or command.endswith("execute"):
+            shell1 = "whois " + domain
+            try:
+                subprocess.run(shell1, shell=True)
+            except:
+                print("There is some trouble...")
+                print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                print("Are you running this script on Linux?")
+        if command.startswith("back") or command.endswith("back"):
+            print("Exiting from module: whois")
+            break
 
 def nikto():
     print("You have chosen the module: nikto")
@@ -193,6 +221,8 @@ while True:
         help()
     if command.startswith("metagoofil") or command.endswith("metagoofil"):
         metagoofil()
+    if command.startswith("whois") or command.endswith("whois"):
+        whois()
     if command.startswith("deauth") or command.endswith("deauth"):
         deauth()
     if command.startswith("nikto") or command.endswith("nikto"):
