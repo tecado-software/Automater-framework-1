@@ -44,3 +44,11 @@ Version 1.3.0 (28/08/2020):
   added tool: hping3
   
   added tool: dmitry (deep magic)
+  
+Version 2.0.0 (30/08/2020):
+
+  changed user interface
+  
+  added new tool: hydra
+  
+  added new tool: httrack
