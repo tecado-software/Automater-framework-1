@@ -1,7 +1,9 @@
 metagoofil
-whois
 dmitry (deep magic)
+whois
 hping3
 nikto
 wafw00f
+httrack
+hydra
 aircrack-ng
