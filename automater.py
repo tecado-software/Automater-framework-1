@@ -5,19 +5,19 @@ def welcome():
     var = random.randint(0,4)
     val = random.randint(0,4)
     if val == 0:
-        frase = "\"si vis pacem para bellum\""
+        frase = "si vis pacem para bellum"
         frase1 = "Ancient Roman saying (If you want peace, prepare for war)"
     elif val == 1:
-        frase = "\"Veni, vidi, vici\""
+        frase = "Veni, vidi, vici"
         frase1 = "Julius Caesar (I came, I saw, I conquered)"
     elif val == 2:
-        frase = "\"Two things are infinite: the universe and human stupidity, but I still have doubts about the universe\""
+        frase = "Two things are infinite: the universe and human stupidity, but I still have doubts about the universe"
         frase1 = "Albert Einstein"
     elif val == 3:
-        frase = "\"A computer il like air conditioning. It become useless when you open Windows\""
+        frase = "A computer il like air conditioning. It become useless when you open Windows"
         frase1 = "Linus Torvalds"
     else:
-        frase = "\"We have problems with our physical security, operational security through to management\""
+        frase = "We have problems with our physical security, operational security through to management"
         frase1 = "Kevin Mitnick"
     if var == 0:
         print("    _         _                        _            ")
