@@ -4,6 +4,7 @@ whois
 hping3
 nikto
 wafw00f
+weevely
 httrack
 hydra
 aircrack-ng
