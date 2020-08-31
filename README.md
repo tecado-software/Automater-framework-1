@@ -52,3 +52,9 @@ Version 2.0.0 (30/08/2020):
   added new tool: hydra
   
   added new tool: httrack
+  
+Version 2.1.0 (31/08/2020):
+  
+  added new tool: weevely
+  
+  moved "deauthe" in the module "aircrack-ng" and added "scan"
