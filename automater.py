@@ -5,25 +5,25 @@ def welcome():
     var = random.randint(0,4)
     val = random.randint(0,4)
     if val == 0:
-        frase = "si vis pacem para bellum"
+        frase = "\"si vis pacem para bellum\""
         frase1 = "Ancient Roman saying (If you want peace, prepare for war)"
     elif val == 1:
-        frase = "Veni, vidi, vici"
+        frase = "\"Veni, vidi, vici\""
         frase1 = "Julius Caesar (I came, I saw, I conquered)"
     elif val == 2:
-        frase = "Two things are infinite: the universe and human stupidity, but I still have doubts about the universe"
+        frase = "\"Two things are infinite: the universe and human stupidity, but I still have doubts about the universe\""
         frase1 = "Albert Einstein"
     elif val == 3:
-        frase = "A computer il like air conditioning. It become useless when you open Windows"
+        frase = "\"A computer il like air conditioning. It become useless when you open Windows\""
         frase1 = "Linus Torvalds"
     else:
-        frase = "We have problems with our physical security, operational security through to management"
+        frase = "\"We have problems with our physical security, operational security through to management\""
         frase1 = "Kevin Mitnick"
     if var == 0:
         print("    _         _                        _            ")
         print("   / \  _   _| |_ ___  _ __ ___   __ _| |_ ___ _ __ ", frase)
         print("  / _ \| | | | __/ _ \| '_ ` _ \ / _` | __/ _ \ '__|", frase1)
-        print(" / ___ \ |_| | || (_) | | | | | | (_| | ||  __/ |    v.2.0.0")
+        print(" / ___ \ |_| | || (_) | | | | | | (_| | ||  __/ |    v.2.1.0")
         print("/_/   \_\__,_|\__\___/|_| |_| |_|\__,_|\__\___|_|    By @gasmat")
         print()
     if var == 1:
@@ -32,24 +32,24 @@ def welcome():
         print(" #   #  #    #   #   #    # ##  ##  #  #    #   #      #    # ")
         print("#     # #    #   #   #    # # ## # #    #   #   #####  #    # ", frase)
         print("####### #    #   #   #    # #    # ######   #   #      #####  ", frase1)
-        print("#     # #    #   #   #    # #    # #    #   #   #      #   #   v.2.0.0")
+        print("#     # #    #   #   #    # #    # #    #   #   #      #   #   v.2.1.0")
         print("#     #  ####    #    ####  #    # #    #   #   ###### #    #  By @gasmat")
     if var == 2:
         print("               _                        _            ")
         print("    /\        | |                      | |           ")
         print("   /  \  _   _| |_ ___  _ __ ___   __ _| |_ ___ _ __ ", frase)
         print("  / /\ \| | | | __/ _ \| '_ ` _ \ / _` | __/ _ \ '__|", frase1)
-        print(" / ____ \ |_| | || (_) | | | | | | (_| | ||  __/ |    v.2.0.0")
+        print(" / ____ \ |_| | || (_) | | | | | | (_| | ||  __/ |    v.2.1.0")
         print("/_/    \_\__,_|\__\___/|_| |_| |_|\__,_|\__\___|_|    By @gasmat")
     if var == 3:
         print("    \          |                         |            ", frase)
         print("   _ \   |   | __|  _ \  __ `__ \   _` | __|  _ \  __|",frase1)
-        print("  ___ \  |   | |   (   | |   |   | (   | |    __/ |    v.2.0.0")
+        print("  ___ \  |   | |   (   | |   |   | (   | |    __/ |    v.2.1.0")
         print("_/    _\\__,_|\__|\___/ _|  _|  _|\__,_|\__|\___|_|    By @gasmat ")
     if var == 4:
         print("   _       _                  _           ", frase)
         print("  /_\ _  _| |_ ___ _ __  __ _| |_ ___ _ _ ", frase1)
-        print(" / _ \ || |  _/ _ \ '  \/ _` |  _/ -_) '_| v.2.0.0")
+        print(" / _ \ || |  _/ _ \ '  \/ _` |  _/ -_) '_| v.2.1.0")
         print("/_/ \_\_,_|\__\___/_|_|_\__,_|\__\___|_|   By @gasmat")
 
 def help():
@@ -75,11 +75,12 @@ def list_all():
     print("\tnikto              Make a vulnerability scanner")
     print("\twafw00f            Scan for web application firewall")
     print("Website:")
+    print("\tweevely            Generate and run webshell for website")
     print("\thttrack            Clone a website")
     print("Password:")
     print("\thydra              Password cracker for most protocols")
     print("Wi-Fi:")
-    print("\tdeauth             Make a deauth attack")
+    print("\taircrack-ng        Tool from the aircrack-ng suite")
 
 def clear():
     subprocess.run("clear", shell=True)
@@ -99,12 +100,14 @@ def use():
         nikto()
     if module == "wafw00f":
         wafw00f()
+    if module == "weevely":
+        weevely()
     if module == "httrack":
         httrack()
     if module == "hydra":
         hydra()
-    if module == "deauth":
-        deauth()
+    if module == "aircrack-ng":
+        aircrack_ng()
 
 def metagoofil(): 
     print("You have chosen the module: metagoofil")
@@ -185,6 +188,8 @@ def deep_magic():
 
 def whois():
     print("You have chosen the module: whois")
+    verbose = False
+    vverbose = "no"
     domain = ""
     while True:
         command = str(input("#whois>>>"))
@@ -200,14 +205,29 @@ def whois():
         if command.startswith("show options") or command.endswith("show options"):
             print("OPTION       REQUIRED    CURRENT VALUE")
             print("domain       yes        ", domain)
+            print("verbose      no         ", vverbose)
         if "set" in command:
             module1 = command.replace("set", "")
             module = module1.replace(" ", "")
             if "domain" in module:
                 domain = module.replace("domain", "")
                 print("domain ==>", domain)
+            if "verbose" in module:
+                vverbose = module.replace("verbose", "")
+                if vverbose == "yes" or vverbose == "no":
+                    print("verbose ==>", vverbose)
+                    if vverbose == "yes":
+                        verbose = True
+                    else:
+                        verbose = False
+                else:
+                    print("The option verbose can be only yes or no")
+                    vverbose = "no"
         if command.startswith("execute") or command.endswith("execute"):
-            shell1 = "whois " + domain
+            if verbose == False:
+                shell1 = "whois " + domain
+            else:
+                shell1 = "whois " + domain + " --verbose"
             try:
                 print("[+] Running command:", shell1)
                 subprocess.run(shell1, shell=True)
@@ -224,6 +244,11 @@ def hping3():
     interface = ""
     target = ""
     mode = ""
+    vmode = ""
+    flood = False
+    vflood = "no"
+    verbose = False
+    vverbose = "no"
     while True:
         command = str(input("#hping3>>>"))
         if command.startswith("help") or command.endswith("help"):
@@ -235,26 +260,13 @@ def hping3():
             print("\tset <OPTION>       Set the value of the <OPTION>")
             print("\texecute            Start the tool")
             print("\tback               Go back to the main menu")
-        if command.startswith("interface") or command.endswith("interface"):
-            interface1 = command.replace("interface", "")
-            interface = interface1.replace(" ", "")
-            print("interface ==>", interface)
-        if command.startswith("target") or command.endswith("target"):
-            target1 = command.replace("target", "")
-            target = target1.replace(" ", "")
-            print("target ==>", target)
-        if command.startswith("mode") or command.endswith("mode"):
-            mode1 = command.replace("mode", "")
-            mode = mode1.replace(" ", "")
-            print("mode ==>", mode)
-            if not(mode == "raw ip" or mode == "icmp" or mode == "udp"):
-                print("Invalid mode!")
-                mode = ""
         if command.startswith("show options") or command.endswith("show options"):
             print("OPTION       REQUIRED    CURRENT VALUE")
             print("interface    yes        ", interface)
             print("target       yes        ", target)
             print("mode         yes        ", mode, "(must be: raw ip, icmp, udp)")
+            print("flood        no         ", vflood, "(Warning: you can damage the target machine)")
+            print("verbose      no         ", vverbose)
         if "set" in command:
             module1 = command.replace("set", "")
             module = module1.replace(" ", "")
@@ -266,11 +278,33 @@ def hping3():
                 print("target ==>", target)
             if "mode" in module:
                 mode = module.replace("mode", "")
-                if not(mode == "rawip" or mode == "icmp" or mode == "udp"):
+                if mode == "rawip" or mode == "icmp" or mode == "udp":
+                    print("mode ==>", mode)
+                else:
                     print("Invalid mode!")
                     mode = ""
+            if "flood" in module:
+                vflood = module.replace("flood", "")
+                if vflood == "yes" or vflood == "no":
+                    print("flood ==>", vflood)
+                    if vflood == "yes":
+                        flood = True
+                    else:
+                        flood = False
                 else:
-                    print("mode ==>", mode)
+                    print("The option flood can be only yes or no")
+                    vflood = "no"
+            if "verbose" in module:
+                vverbose = module.replace("verbose", "")
+                if vverbose == "yes" or vverbose == "no":
+                    print("verbose ==>", vverbose)
+                    if vverbose == "yes":
+                        verbose = True
+                    else:
+                        verbose = False
+                else:
+                    print("The option verbose can be only yes or no")
+                    vverbose = "no"
         if command.startswith("execute") or command.endswith("execute"):
             if mode == "raw ip":
                 vmode = "0"
@@ -278,7 +312,16 @@ def hping3():
                 vmode = "1"
             elif mode == "udp":
                 vmode = "2"
-            shell1 = "hping3 -" + vmode + " -I " + interface + " " + target
+            if verbose == True:
+                if flood == False:
+                    shell1 = "hping3 -" + vmode + " -I " + interface + " " + target + " -V"
+                else:
+                    shell1 = "hping3 -" + vmode + " -I " + interface + " " + target + " --flood -V"
+            else:
+                if flood == False:
+                    shell1 = "hping3 -" + vmode + " -I " + interface + " " + target
+                else:
+                    shell1 = "hping3 -" + vmode + " -I " + interface + " " + target + " --flood"
             try:
                 print("[+] Running command:", shell1)
                 subprocess.run(shell1, shell=True)
@@ -293,6 +336,7 @@ def hping3():
 def nikto(): 
     print("You have chosen the module: nikto")
     target = ""
+    port = "80"
     while True:
         command = str(input("#nikto>>>"))
         if command.startswith("help") or command.endswith("help"):
@@ -307,14 +351,18 @@ def nikto():
         if command.startswith("show options") or command.endswith("show options"):
             print("OPTION       REQUIRED    CURRENT VALUE")
             print("target       yes        ", target)
+            print("port         no         ", port)
         if "set" in command:
             module1 = command.replace("set", "")
             module = module1.replace(" ", "")
             if "target" in module:
                 target = module.replace("target", "")
                 print("target ==>", target)
+            if "port" in module:
+                port = module.replace("port", "")
+                print("port ==>", port)
         if command.startswith("execute") or command.endswith("execute"):
-            shell1 = "nikto -host " + target
+            shell1 = "nikto -host " + target + " -port " + port
             try:
                 print("[+] Running command:", shell1)
                 subprocess.run(shell1, shell=True)
@@ -329,6 +377,10 @@ def nikto():
 def wafw00f(): 
     print("You have chosen the module: wafw00f")
     domain = ""
+    verbose = False
+    vverbose = "no"
+    listall = False
+    vlistall = "no"
     while True:
         command = str(input("#wafw00f>>>"))
         if command.startswith("help") or command.endswith("help"):
@@ -340,17 +392,48 @@ def wafw00f():
             print("\tset <OPTION>       Set the value of the <OPTION>")
             print("\texecute            Start the tool")
             print("\tback               Go back to the main menu")
+        if command.startswith("show options") or command.endswith("show options"):
+            print("OPTIONS      REQUIRED    CURRENT VALUE")
+            print("domain       yes        ", domain)
+            print("list all     no         ", vlistall)
+            print("verbose      no         ", vverbose)
         if "set" in command:
             module1 = command.replace("set", "")
             module = module1.replace(" ", "")
             if "domain" in module:
                 domain = module.replace("domain", "")
                 print("domain ==>", domain)
-        if command.startswith("show options") or command.endswith("show options"):
-            print("OPTIONS      REQUIRED    CURRENT VALUE")
-            print("domain       yes        ", domain)
+            if "listall" in module:
+                vlistall = module.replace("listall", "")
+                if vlistall == "yes" or vlistall == "no":
+                    print("list all ==>", vlistall)
+                    if vlistall == "yes":
+                        listall = True
+                    else:
+                        listall = False
+                else:
+                    print("The option list all can be only yes or no")
+            if "verbose" in module:
+                vverbose = module.replace("verbose", "")
+                if vverbose == "yes" or vverbose == "no":
+                    print("verbose ==>", vverbose)
+                    if vverbose == "yes":
+                        verbose = True
+                    else:
+                        verbose = False
+                else:
+                    print("The option verbose can be only yes or no")
         if command.startswith("execute") or command.endswith("execute"):
-            shell1 = "wafw00f " + domain
+            if verbose == True:
+                if listall == True:
+                    shell1 = "wafw00f -a -v " + domain
+                else:
+                    shell1 = "wafw00f -v " + domain
+            else:
+                if listall == True:
+                    shell1 = "wafw00f -a " + domain
+                else:
+                    shell1 = "wafw00f " + domain
             try:
                 print("[+] Running command:", shell1)
                 subprocess.run(shell1, shell=True)
@@ -362,10 +445,113 @@ def wafw00f():
             print("Exiting from module: wafw00f")
             break
 
+def weevely():
+    print("You have chosen the module: weevely")
+    while True:
+        command = str(input("#weevely>>>"))
+        if command.startswith("help") or command.endswith("help"):
+            print()
+            print("This tool generate a webshell for website that use PHP.")
+            print("\tCOMMAND            DESCRIPTION")
+            print("\thelp               Show this help message")
+            print("\tshow modules       Show the modules")
+            print("\tuse <MODULE>       Use a module")
+            print("\tback               Go back to the main menu")
+        if command.startswith("show modules") or command.endswith("show modules"):
+            print("MODULE       DESCRIPTION")
+            print("generate     Generate the shell")
+            print("run          Run the shell")
+        if "use" in command:
+            module1 = command.replace("use", "")
+            module = module1.replace(" ", "")
+            if module == "generate":
+                print("You have chosen the module: generate")
+                password = ""
+                file0 = ""
+                while True:
+                    command1 = str(input("#weevely/generate>>>"))
+                    if command1.startswith("help") or command1.endswith("help"):
+                        print()
+                        print("\tCOMMAND            DESCRIPTION")
+                        print("\thelp               Show this help message")
+                        print("\tshow options       Show the options to set")
+                        print("\tset <OPTION>       Set the value of the <OPTION>")
+                        print("\texecute            start the module")
+                        print("\tback               Go back to the weevely menu")
+                    if command1.startswith("show options") or command1.endswith("show options"):
+                        print("OPTIONS      REQUIRED    CURRENT VALUE")
+                        print("password     yes        ", password)
+                        print("file         yes        ", file0, "(must finish with .php")
+                    if "set" in command1:
+                        module1 = command1.replace("set", "")
+                        module = module1.replace(" ", "")
+                        if "password" in module:
+                            password = module.replace("password", "")
+                            print("password ==>", password)
+                        if "file" in module:
+                            file0 = module.replace("file", "")
+                            print("file ==>", file0)
+                    if command1.startswith("execute") or command1.endswith("execute"):
+                        shell1 = "weevely generate " + password + " " + file0
+                        try:
+                            print("[+] Running command:", shell1)
+                            subprocess.run(shell1, shell=True)
+                        except:
+                            print("There is some trouble...")
+                            print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                            print("Are you running this script on Linux?")
+                    if command1.startswith("back") or command1.endswith("back"):
+                        print("Exiting from module: generate")
+                        break
+            if module == "run":
+                print("You have chosen the module: run")
+                url = ""
+                password = ""
+                while True:
+                    command1 = str(input("#weevely/run>>>"))
+                    if command1.startswith("help") or command1.endswith("help"):
+                        print()
+                        print("\tCOMMAND            DESCRIPTION")
+                        print("\thelp               Show this help message")
+                        print("\tshow options       Show the options to set")
+                        print("\tset <OPTION>       Set the value of the <OPTION>")
+                        print("\texecute            Start the module")
+                        print("\tback               Go back to the weevely menu")
+                    if command1.startswith("show options") or command1.endswith("show options"):
+                        print("OPTIONS      REQUIRED    CURRENT VALUE")
+                        print("url          yes        ", url, "(the URL of the uploaded shell)")
+                        print("password     yes        ", password)
+                    if "set" in command1:
+                        module1 = command1.replace("set", "")
+                        module = module1.replace(" ", "")
+                        if "url" in module:
+                            url = module.replace("url", "")
+                            print("url ==>", url)
+                        if "password" in module:
+                            password = module.replace("password", "")
+                            print("password ==>", password)
+                    if command1.startswith("execute") or command.endswith("execute"):
+                        shell1 = "weevely " + url + " " + password
+                        try:
+                            print("[+] Running command:", shell1)
+                            subprocess.run(shell1, shell=True)
+                        except:
+                            print("There is some trouble...")
+                            print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                            print("Are you running this script on Linux?")
+                    if command1.startswith("back") or command1.endswith("back"):
+                        print("Exiting from module: run")
+                        break
+        if command.startswith("back") or command.endswith("back"):
+            print("Exiting from module: weevely")
+            break
+
 def httrack():
     print("You have chosen the module: httrack")
     website = ""
     directory = ""
+    verbose = False
+    vverbose = "no"
     while True:
         command = str(input("#httrack>>>"))
         if command.startswith("help") or command.endswith("help"):
@@ -380,7 +566,8 @@ def httrack():
         if command.startswith("show options") or command.endswith("show options"):
             print("OPTIONS      REQUIRED    CURRENT VALUE")
             print("website      yes        ", website)
-            print("directory    yes        ", directory)
+            print("directory    no         ", directory)
+            print("verbose      no         ", vverbose)
         if "set" in command:
             module1 = command.replace("set", "")
             module = module1.replace(" ", "")
@@ -390,8 +577,27 @@ def httrack():
             if "directory" in module:
                 directory = module.replace("directory", "")
                 print("directory ==>", directory)
+            if "verbose" in module:
+                vverbose = module.replace("verbose", "")
+                if vverbose == "yes" or vverbose == "no":
+                    print("verbose ==>", vverbose)
+                    if vverbose == "yes":
+                        verbose = True
+                    else:
+                        verbose = False
+                else:
+                    print("The option verbose can be only yes or no")
         if command.startswith("execute") or command.endswith("execute"):
-            shell1 = "httrack " + website + " " + directory + " -v"
+            if verbose == True:
+                if directory != "":
+                    shell1 = "httrack " + website + " " + directory + " -v"
+                else:
+                    shell1 = "httrack " + website + " -v"
+            else:
+                if directory != "":
+                    shell1 = "httrack " + website + " " + directory
+                else:
+                    shell1 = "httrack " + website
             try:
                 print("[+] Running command:", shell1)
                 subprocess.run(shell1, shell=True)
@@ -403,7 +609,6 @@ def httrack():
             print("Exiting from module: httrack")
             break
 
-
 def hydra():
     print("You have chosen the module: hydra")
     protocol = ""
@@ -411,6 +616,8 @@ def hydra():
     login = ""
     password = ""
     protocol = ""
+    verbose = False
+    vverbose = "no"
     while True:
         command = str(input("#hydra>>>"))
         if command.startswith("help") or command.endswith("help"):
@@ -428,6 +635,7 @@ def hydra():
             print("login        yes        ", login, "(must be a file)")
             print("password     yes        ", password, "(must be a file)")
             print("protocol     yes        ", protocol, "(ftp, smb, pop3, imap, mysql, vnc, ssh and telnet)")
+            print("verbose      no         ", vverbose)
         if "set" in command:
             module1 = command.replace("set", "")
             module = module1.replace(" ", "")
@@ -447,8 +655,21 @@ def hydra():
                 else:
                     protocol = ""
                     print("Invalid protocol!")
+            if "verbose" in module:
+                vverbose = module.replace("verbose", "")
+                if vverbose == "yes" or vverbose == "no":
+                    print("verbose ==>", vverbose)
+                    if vverbose == "yes":
+                        verbose = True
+                    else:
+                        verbose = False
+                else:
+                    print("The option verbose can be only yes or no")
         if command.startswith("execute") or command.endswith("execute"):
-            shell1 = "hydra -L " + login + " -P " + password + " " + protocol + "://" + host
+            if verbose == True:
+                shell1 = "hydra -v -L " + login + " -P " + password + " " + protocol + "://" + host
+            else:
+                shell1 = "hydra -L " + login + " -P " + password + " " + protocol + "://" + host
             try:
                 print("[+] Running command:", shell1)
                 subprocess.run(shell1, shell=True)
@@ -460,15 +681,10 @@ def hydra():
             print("Exiting from module: hydra")
             break
 
-def deauth():
-    print("You have chosen the module: deauth")
-    interface = ""
-    bssid = ""
-    mac = ""
-    number = ""
-    channel = ""
+def aircrack_ng():
+    print("You have chosen the module: aircrack-ng")
     while True:
-        command = str(input("#deauth>>>"))
+        command = str(input("#aircrack-ng>>>"))
         if command.startswith("help") or command.endswith("help"):
             print("This module make a deauth attack")
             print("Before you use this module you have to run, in another terminal, \"airmon-ng start wlan0\" and then \"airodump-ng wlan0\"")
@@ -476,50 +692,130 @@ def deauth():
             print()
             print("\tCOMMAND            DESCRIPTION")
             print("\thelp               Show this help message")
-            print("\tshow options       Show the options to set")
-            print("\tset <OPTION>       Set the value of the <OPTION>")
-            print("\texecute            Start the tool")
+            print("\tshow modules       Show the modules")
+            print("\tuse <MODULE>       Use a module")
             print("\tback               Go back to the main menu")
-        if command.startswith("show options") or command.endswith("show options"):
-            print("OPTIONS      REQUIRED    CURRENT VALUE")
-            print("interface    yes        ", interface, "(not in monitor mode)")
-            print("bssid        yes        ", bssid, "(in the column BSSID)")
-            print("mac          yes        ", mac, "(in the column STATION, on the same line as the target's bssid)")
-            print("number       yes        ", number)
-            print("channel      recommended", channel, "(in the column CH, on the same line as the target's bssid)")
-        if "set" in command:
-            module1 = command.replace("set", "")
+        if command.startswith("show modules") or command.endswith("show modules"):
+            print("MODULE       DESCRIPTION")
+            print("scan         Scan for Acces Point")
+            print("deauth       Make a deauthentication attack")
+        if "use" in command:
+            module1 = command.replace("use", "")
             module = module1.replace(" ", "")
-            if "interface" in module:
-                interface = module.replace("interface", "")
-                print("interface ==>", interface)
-            if "bssid" in module:
-                bssid = module.replace("bssid", "")
-                print("bssid ==>", bssid)
-            if "mac" in module:
-                mac = module.replace("mac", "")
-                print("mac ==>", mac)
-            if "number" in module:
-                number = module.replace("number", "")
-                print("number ==>", "")
-            if "channel" in module:
-                channel = module.replace("channel", "")
-                print("channel ==>", channel)
-        if command.startswith("execute") or command.endswith("execute"):
-            shell1 = "airmon-ng start " + interface + " " + channel
-            interface2 = interface + "mon"
-            shell2 = "aireplay-ng -0 " + number + " -a " + bssid + " -c " + mac + " " + interface2
-            try:
-                print("[+] Running command:", shell1)
-                subprocess.run(shell1, shell=True)
-                print("[+] Running command:", shell2)
-                subprocess.run(shell2, shell=True)
-            except:
-                print("There is some trouble...")
-                print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
-                print("Are you running this script on Linux?")
+            if "scan" in module:
+                print("You have chosen the module: scan")
+                interface = ""
+                channel = ""
+                while True:
+                    command1 = str(input("#aircrack-ng/scan>>>"))
+                    if command1.startswith("help") or command1.endswith("help"):
+                        print("This module make a scan for Acces Point")
+                        print()
+                        print("\tCOMMAND            DESCRIPTION")
+                        print("\thelp               Show this help message")
+                        print("\tshow options       Show the options to set")
+                        print("\tset <OPTION>       Set the value of the <OPTION>")
+                        print("\tstart              Start the module")
+                        print("\tstop               Stop the module")
+                        print("\tback               Go back to the main menu")
+                    if command1.startswith("show options") or command.endswith("show options"):
+                        print("OPTIONS      REQUIRED    CURRENT VALUE")
+                        print("interface    yes        ", interface, "(not in monitor mode)")
+                    if "set" in command1:
+                        module1 = command1.replace("set", "")
+                        module = module1.replace(" ", "")
+                        if "interface" in module:
+                            interface = module.replace("interface", "")
+                            print("interface ==>", interface)
+                    if command1.startswith("start") or command1.endswith("start"):
+                        shell1 = "airmon-ng start " + interface
+                        interface2 = interface + "mon"
+                        shell2 = "airodump-ng " + interface2
+                        try:
+                            print("[+] Running command:", shell1)
+                            subprocess.run(shell1, shell=True)
+                            print("[+] Running command:", shell2)
+                            subprocess.run(shell2, shell=True)
+                        except:
+                            print("There is some trouble...")
+                            print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                            print("Are you running this script on Linux?")
+                    if command1.startswith("stop") or command1.endswith("stop"):
+                        interface2 = interface + "mon"
+                        shell1 = "airmon-ng stop " + interface2
+                        try:
+                            print("[+] Running command:", shell1)
+                            subprocess.run(shell1, shell=True)
+                        except:
+                            print("There is some trouble...")
+                            print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                            print("Are you running this script on Linux?")
+                    if command1.startswith("back") or command1.endswith("back"):
+                        print("Exiting from module: deauth")
+                        break
+            if "deauth" in module:
+                print("You have chosen the module: deauth")
+                interface = ""
+                bssid = ""
+                mac = ""
+                number = ""
+                channel = ""
+                while True:
+                    command1 = str(input("#aircrack-ng/deauth>>>"))
+                    if command1.startswith("help") or command1.endswith("help"):
+                        print("This module make a deauth attack")
+                        print("Before you use this module you have to run, in another terminal, the module scan, and then write start")
+                        print("when you see your victim hit Ctrl-C and reenter in Automater reuse the module scan, and then write stop. This allows you to get what you need")
+                        print()
+                        print("\tCOMMAND            DESCRIPTION")
+                        print("\thelp               Show this help message")
+                        print("\tshow options       Show the options to set")
+                        print("\tset <OPTION>       Set the value of the <OPTION>")
+                        print("\texecute            Start the module")
+                        print("\tback               Go back to the main menu")
+                    if command1.startswith("show options") or command.endswith("show options"):
+                        print("OPTIONS      REQUIRED    CURRENT VALUE")
+                        print("interface    yes        ", interface, "(not in monitor mode)")
+                        print("bssid        yes        ", bssid, "(in the column BSSID)")
+                        print("mac          yes        ", mac, "(in the column STATION, on the same line as the target's bssid)")
+                        print("number       yes        ", number)
+                        print("channel      recommended", channel, "(in the column CH, on the same line as the target's bssid)")
+                    if "set" in command1:
+                        module1 = command1.replace("set", "")
+                        module = module1.replace(" ", "")
+                        if "interface" in module:
+                            interface = module.replace("interface", "")
+                            print("interface ==>", interface)
+                        if "bssid" in module:
+                            bssid = module.replace("bssid", "")
+                            print("bssid ==>", bssid)
+                        if "mac" in module:
+                            mac = module.replace("mac", "")
+                            print("mac ==>", mac)
+                        if "number" in module:
+                            number = module.replace("number", "")
+                            print("number ==>", "")
+                        if "channel" in module:
+                            channel = module.replace("channel", "")
+                            print("channel ==>", channel)
+                    if command1.startswith("execute") or command1.endswith("execute"):
+                        shell1 = "airmon-ng start " + interface + " " + channel
+                        interface2 = interface + "mon"
+                        shell2 = "aireplay-ng -0 " + number + " -a " + bssid + " -c " + mac + " " + interface2
+                        try:
+                            print("[+] Running command:", shell1)
+                            subprocess.run(shell1, shell=True)
+                            print("[+] Running command:", shell2)
+                            subprocess.run(shell2, shell=True)
+                        except:
+                            print("There is some trouble...")
+                            print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                            print("Are you running this script on Linux?")
+                    if command1.startswith("back") or command1.endswith("back"):
+                        print("Exiting from module: deauth")
+                        break
         if command.startswith("back") or command.endswith("back"):
-            print("Exiting from module: deauth")
+            print("Exiting from module: aircrack-ng")
             break
 
 welcome()
