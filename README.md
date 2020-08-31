@@ -57,4 +57,4 @@ Version 2.1.0 (31/08/2020):
   
   added new tool: weevely
   
-  moved "deauthe" in the module "aircrack-ng" and added "scan"
+  moved "deauth" in the module "aircrack-ng" and added "scan"
