@@ -634,7 +634,7 @@ def nmap():
                             directory = module.replace("directory", "")
                             print("directory ==>", directory)
                     if command1.startswith("execute") or command1.endswith("execute"):
-                        shell1 = "nmap -p" + port + " --script http-put --script-args http-put.url='" + directory + "',http-put.file='" + file0 + "'"
+                        shell1 = "nmap -p" + port + " " + target + " --script http-put --script-args http-put.url='" + directory + "',http-put.file='" + file0 + "'"
                         try:
                             print("[+] Running command:", shell1)
                             subprocess.run(shell1, shell=True)
