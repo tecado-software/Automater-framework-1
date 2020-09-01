@@ -23,7 +23,7 @@ def welcome():
         print("    _         _                        _            ")
         print("   / \  _   _| |_ ___  _ __ ___   __ _| |_ ___ _ __ ", frase)
         print("  / _ \| | | | __/ _ \| '_ ` _ \ / _` | __/ _ \ '__|", frase1)
-        print(" / ___ \ |_| | || (_) | | | | | | (_| | ||  __/ |    v.2.1.0")
+        print(" / ___ \ |_| | || (_) | | | | | | (_| | ||  __/ |    v.2.2.0")
         print("/_/   \_\__,_|\__\___/|_| |_| |_|\__,_|\__\___|_|    By @gasmat")
         print()
     if var == 1:
@@ -32,24 +32,24 @@ def welcome():
         print(" #   #  #    #   #   #    # ##  ##  #  #    #   #      #    # ")
         print("#     # #    #   #   #    # # ## # #    #   #   #####  #    # ", frase)
         print("####### #    #   #   #    # #    # ######   #   #      #####  ", frase1)
-        print("#     # #    #   #   #    # #    # #    #   #   #      #   #   v.2.1.0")
+        print("#     # #    #   #   #    # #    # #    #   #   #      #   #   v.2.2.0")
         print("#     #  ####    #    ####  #    # #    #   #   ###### #    #  By @gasmat")
     if var == 2:
         print("               _                        _            ")
         print("    /\        | |                      | |           ")
         print("   /  \  _   _| |_ ___  _ __ ___   __ _| |_ ___ _ __ ", frase)
         print("  / /\ \| | | | __/ _ \| '_ ` _ \ / _` | __/ _ \ '__|", frase1)
-        print(" / ____ \ |_| | || (_) | | | | | | (_| | ||  __/ |    v.2.1.0")
+        print(" / ____ \ |_| | || (_) | | | | | | (_| | ||  __/ |    v.2.2.0")
         print("/_/    \_\__,_|\__\___/|_| |_| |_|\__,_|\__\___|_|    By @gasmat")
     if var == 3:
         print("    \          |                         |            ", frase)
         print("   _ \   |   | __|  _ \  __ `__ \   _` | __|  _ \  __|",frase1)
-        print("  ___ \  |   | |   (   | |   |   | (   | |    __/ |    v.2.1.0")
+        print("  ___ \  |   | |   (   | |   |   | (   | |    __/ |    v.2.2.0")
         print("_/    _\\__,_|\__|\___/ _|  _|  _|\__,_|\__|\___|_|    By @gasmat ")
     if var == 4:
         print("   _       _                  _           ", frase)
         print("  /_\ _  _| |_ ___ _ __  __ _| |_ ___ _ _ ", frase1)
-        print(" / _ \ || |  _/ _ \ '  \/ _` |  _/ -_) '_| v.2.1.0")
+        print(" / _ \ || |  _/ _ \ '  \/ _` |  _/ -_) '_| v.2.2.0")
         print("/_/ \_\_,_|\__\___/_|_|_\__,_|\__\___|_|   By @gasmat")
 
 def help():
@@ -61,6 +61,7 @@ def help():
     print("help                 Show this help message")
     print("list all             List all tool")
     print("use <MODULE>         Use the selected module")
+    print("ip                   Get your internal and external ip address")
     print("clear                Clear the screen")
     print("exit                 Exit the framework")
 
@@ -72,8 +73,10 @@ def list_all():
     print("\tdeep magic         Set of tools for information gathering")
     print("\thping3             Detect if the target is alive")
     print("Scanner:")
+    print("\tnmap               Most used port scanner")
     print("\tnikto              Make a vulnerability scanner")
     print("\twafw00f            Scan for web application firewall")
+    print("\tlbd                Scan for Load Balancer")
     print("Website:")
     print("\tweevely            Generate and run webshell for website")
     print("\thttrack            Clone a website")
@@ -96,10 +99,14 @@ def use():
         deep_magic()
     if module == "hping3":
         hping3()
+    if module == "nmap":
+        nmap()
     if module == "nikto":
         nikto()
     if module == "wafw00f":
         wafw00f()
+    if module == "lbd":
+        lbd()
     if module == "weevely":
         weevely()
     if module == "httrack":
@@ -108,6 +115,12 @@ def use():
         hydra()
     if module == "aircrack-ng":
         aircrack_ng()
+
+def ip():
+    print("----------------INTERNAL IP----------------")
+    subprocess.run("sudo ifconfig", shell=True)
+    print("----------------EXTERNAL IP----------------")
+    subprocess.run("sudo curl ipecho.net/plain ; echo", shell=True)
 
 def metagoofil(): 
     print("You have chosen the module: metagoofil")
@@ -188,9 +201,9 @@ def deep_magic():
 
 def whois():
     print("You have chosen the module: whois")
+    domain = ""
     verbose = False
     vverbose = "no"
-    domain = ""
     while True:
         command = str(input("#whois>>>"))
         if command.startswith("help") or command.endswith("help"):
@@ -224,10 +237,9 @@ def whois():
                     print("The option verbose can be only yes or no")
                     vverbose = "no"
         if command.startswith("execute") or command.endswith("execute"):
-            if verbose == False:
-                shell1 = "whois " + domain
-            else:
-                shell1 = "whois " + domain + " --verbose"
+            shell1 = "whois " + domain + " "
+            if verbose == True:
+                shell1 += "--verbose"
             try:
                 print("[+] Running command:", shell1)
                 subprocess.run(shell1, shell=True)
@@ -312,16 +324,11 @@ def hping3():
                 vmode = "1"
             elif mode == "udp":
                 vmode = "2"
+            shell1 = "hping3 -" + vmode + " -I " + interface + " " + target
             if verbose == True:
-                if flood == False:
-                    shell1 = "hping3 -" + vmode + " -I " + interface + " " + target + " -V"
-                else:
-                    shell1 = "hping3 -" + vmode + " -I " + interface + " " + target + " --flood -V"
-            else:
-                if flood == False:
-                    shell1 = "hping3 -" + vmode + " -I " + interface + " " + target
-                else:
-                    shell1 = "hping3 -" + vmode + " -I " + interface + " " + target + " --flood"
+                shell1 += " -V"
+            if flood == True:
+                shell1 += " --flood"
             try:
                 print("[+] Running command:", shell1)
                 subprocess.run(shell1, shell=True)
@@ -331,6 +338,315 @@ def hping3():
                 print("Are you running this script on Linux?")
         if command.startswith("back") or command.endswith("back"):
             print("Exiting from module: hping3")
+            break
+
+def nmap():
+    print("You have chosen the module: nmap")
+    while True:
+        command = str(input("#nmap>>>"))
+        if command.startswith("help") or command.endswith("help"):
+            print()
+            print("This tool generate a webshell for website that use PHP.")
+            print()
+            print("\tCOMMAND            DESCRIPTION")
+            print("\thelp               Show this help message")
+            print("\tshow modules       Show the modules")
+            print("\tuse <MODULE>       Use a module")
+            print("\tback               Go back to the main menu")
+        if command.startswith("show modules") or command.endswith("show modules"):
+            print("MODULE       DESCRIPTION")
+            print("vulner       Scan for vulnerabilities")
+            print("bypass       Bypass firewall")
+            print("detect       Detect firewall with ACK probe")
+            print("file upload  Exploits insecure file upload forms in web applications ")
+            print("upload       Uploads a local file to a remote web server ")
+        if "use" in command:
+            module1 = command.replace("use", "")
+            module = module1.replace(" ", "")
+            if "vulner" in module:
+                print("You have chosen the module: vulner")
+                target = ""
+                service = True
+                sservice = "yes"
+                verbose = False
+                vverbose = "no"
+                while True:
+                    command1 = str(input("#nmap/vulner>>>"))
+                    if command1.startswith("help") or command1.endswith("help"):
+                        print("The numbers indicate the severity of the vulnerability")
+                        print()
+                        print("\tCOMMAND            DESCRIPTION")
+                        print("\thelp               Show this help message")
+                        print("\tshow options       Show the options to set")
+                        print("\tset <OPTION>       Set the value of the <OPTION>")
+                        print("\texecute            start the module")
+                        print("\tback               Go back to the nmap menu")
+                    if command1.startswith("show options") or command1.endswith("show options"):
+                        print("OPTIONS      REQUIRED    CURRENT VALUE")
+                        print("target       yes        ", target)
+                        print("service      no         ", sservice)
+                        print("verbose      no         ", vverbose)
+                    if "set" in command1:
+                        module1 = command1.replace("set", "")
+                        module = module1.replace(" ", "")
+                        if "target" in module:
+                            target = module.replace("target", "")
+                            print("target ==>", target)
+                        if "service" in module:
+                            sservice = module.replace("service", "")
+                            if sservice == "yes" or sservice == "no":
+                                print("service ==>", sservice)
+                                if sservice == "yes":
+                                    service = True
+                                else:
+                                    service = False
+                            else:
+                                print("The option service can be only yes or no")
+                        if "verbose" in module:
+                            vverbose = module.replace("verbose", "")
+                            if vverbose == "yes" or vverbose == "no":
+                                print("verbose ==>", vverbose)
+                                if vverbose == "yes":
+                                    verbose = True
+                                else:
+                                    verbose = False
+                            else:
+                                print("The option verbose can be only yes or no")
+                    if command1.startswith("execute") or command1.endswith("execute"):
+                        shell1 = "nmap "
+                        if verbose == True:
+                            shell1 += "-v "
+                        if service == True:
+                            shell1 += "-sV "
+                        shell1 += "--script vulner "
+                        shell1 += target
+                        try:
+                            print("[+] Running command:", shell1)
+                            subprocess.run(shell1, shell=True)
+                        except:
+                            print("There is some trouble...")
+                            print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                            print("Are you running this script on Linux?")
+                    if command1.startswith("back") or command1.endswith("back"):
+                        print("Exiting from module: vulner")
+                        break
+            if "bypass" in module:
+                print("You have chosen the module: bypass")
+                target = ""
+                decoy = "random"
+                service = True
+                sservice = "yes"
+                fast = True
+                ffast = "yes"
+                verbose = False
+                vverbose = "no"
+                while True:
+                    command1 = str(input("#nmap/bypass>>>"))
+                    if command1.startswith("help") or command1.endswith("help"):
+                        print()
+                        print("\tCOMMAND            DESCRIPTION")
+                        print("\thelp               Show this help message")
+                        print("\tshow options       Show the options to set")
+                        print("\tset <OPTION>       Set the value of the <OPTION>")
+                        print("\texecute            start the module")
+                        print("\tback               Go back to the nmap menu")
+                    if command1.startswith("show options") or command1.endswith("show options"):
+                        print("OPTIONS      REQUIRED    CURRENT VALUE")
+                        print("target       yes        ", target)
+                        print("decoy        no         ", decoy, "(the ip to spoof)")
+                        print("service      no         ", sservice)
+                        print("fast         no         ", ffast)
+                        print("verbose      no         ", vverbose)
+                    if "set" in command1:
+                        module1 = command1.replace("set", "")
+                        module = module1.replace(" ", "")
+                        if "target" in module:
+                            target = module.replace("target", "")
+                            print("target ==>", target)
+                        if "decoy" in module:
+                            decoy = module.replace("decoy", "")
+                            print("decoy ==>", decoy)
+                        if "service" in module:
+                            sservice = module.replace("service", "")
+                            if sservice == "yes" or sservice == "no":
+                                print("service ==>", sservice)
+                                if sservice == "yes":
+                                    service = True
+                                else:
+                                    service = False
+                            else:
+                                print("The option service can be only yes or no")
+                        if "fast" in module:
+                            ffast = module.replace("fast", "")
+                            if ffast == "yes" or ffast == "no":
+                                print("fast ==>", ffast)
+                                if ffast == "yes":
+                                    fast = True
+                                else:
+                                    fast = False
+                            else:
+                                print("The option fast can be only yes or no")
+                        if "verbose" in module:
+                            vverbose = module.replace("verbose", "")
+                            if vverbose == "yes" or vverbose == "no":
+                                print("verbose ==>", vverbose)
+                                if vverbose == "yes":
+                                    verbose = True
+                                else:
+                                    verbose = False
+                            else:
+                                print("The option verbose can be only yes or no")
+                    if command1.startswith("execute") or command1.endswith("execute"):
+                        shell1 = "nmap -sS "
+                        if service == True:
+                            shell1 += "-sV "
+                        if verbose == True:
+                            shell1 += "-v "
+                        if fast == True:
+                            shell1 += "-F "
+                        if decoy == "random":
+                            shell1 += "-D RND "
+                        else:
+                            shell1 += "-D "
+                            shell1 += decoy
+                        shell1 += target
+                        try:
+                            print("[+] Running command:", shell1)
+                            subprocess.run(shell1, shell=True)
+                        except:
+                            print("There is some trouble...")
+                            print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                            print("Are you running this script on Linux?")
+                    if command1.startswith("back") or command1.endswith("back"):
+                        print("Exiting from module: bypass")
+                        break
+            if "detect" in module:
+                print("You have chosen the module: detect")
+                target = ""
+                while True:
+                    command1 = str(input("#nmap/detect>>>"))
+                    if command1.startswith("help") or command1.endswith("help"):
+                        print("If you get print filtered the target has firewall and if you get print unfiltered the target hasn't got a firewall")
+                        print()
+                        print("\tCOMMAND            DESCRIPTION")
+                        print("\thelp               Show this help message")
+                        print("\tshow options       Show the options to set")
+                        print("\tset <OPTION>       Set the value of the <OPTION>")
+                        print("\texecute            start the module")
+                        print("\tback               Go back to the nmap menu")
+                    if command1.startswith("show options") or command1.endswith("show options"):
+                        print("OPTIONS      REQUIRED    CURRENT VALUE")
+                        print("target       yes        ", target)
+                    if "set" in command1:
+                        module1 = command1.replace("set", "")
+                        module = module1.replace(" ", "")
+                        if "target" in module:
+                            target = module.replace("target", "")
+                            print("target ==>", target)
+                    if command1.startswith("execute") or command1.endswith("execute"):
+                        shell1 = "nmap -sA " + target + " --reason"
+                        try:
+                            print("[+] Running command:", shell1)
+                            subprocess.run(shell1, shell=True)
+                        except:
+                            print("There is some trouble...")
+                            print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                            print("Are you running this script on Linux?")
+                    if command1.startswith("back") or command1.endswith("back"):
+                        print("Exiting from module: detect")
+                        break
+            if "fileupload" in module:
+                print("You have chosen the module: file upload")
+                target = ""
+                port = "80"
+                while True:
+                    command1 = str(input("#nmap/file upload>>>"))
+                    if command1.startswith("help") or command1.endswith("help"):
+                        print("Exploits insecure file upload forms in web applications using various techniques")
+                        print("like changing the Content-type header or creating valid image files containing the payload in the comment.")
+                        print()
+                        print("\tCOMMAND            DESCRIPTION")
+                        print("\thelp               Show this help message")
+                        print("\tshow options       Show the options to set")
+                        print("\tset <OPTION>       Set the value of the <OPTION>")
+                        print("\texecute            start the module")
+                        print("\tback               Go back to the nmap menu")
+                    if command1.startswith("show options") or command1.endswith("show options"):
+                        print("OPTIONS      REQUIRED    CURRENT VALUE")
+                        print("target       yes        ", target)
+                        print("port         no         ", port)
+                    if "set" in command1:
+                        module1 = command1.replace("set", "")
+                        module = module1.replace(" ", "")
+                        if "target" in module:
+                            target = module.replace("target", "")
+                            print("target ==>", target)
+                        if "port" in module:
+                            port = module.replace("port", "")
+                            print("port ==>", port)
+                    if command1.startswith("execute") or command1.endswith("execute"):
+                        shell1 = "nmap -p" + port + " --script http-fileupload-exploiter.nse " + target
+                        try:
+                            print("[+] Running command:", shell1)
+                            subprocess.run(shell1, shell=True)
+                        except:
+                            print("There is some trouble...")
+                            print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                            print("Are you running this script on Linux?")
+                    if command1.startswith("back") or command1.endswith("back"):
+                        print("Exiting from module: file upload")
+                        break
+            if "upload" in module:
+                print("You have chosen the module: upload")
+                target = ""
+                port = "80"
+                file0  = ""
+                directory = ""
+                while True:
+                    command1 = str(input("#nmap/upload>>>"))
+                    if command1.startswith("help") or command1.endswith("help"):
+                        print()
+                        print("\tCOMMAND            DESCRIPTION")
+                        print("\thelp               Show this help message")
+                        print("\tshow options       Show the options to set")
+                        print("\tset <OPTION>       Set the value of the <OPTION>")
+                        print("\texecute            start the module")
+                        print("\tback               Go back to the nmap menu")
+                    if command1.startswith("show options") or command1.endswith("show options"):
+                        print("OPTIONS      REQUIRED    CURRENT VALUE")
+                        print("target       yes        ", target)
+                        print("port         no         ", port)
+                        print("file         yes        ", file0 , "(The full path to the local file that should be uploaded to the server)")
+                        print("directory    yes        ", directory, "(The remote directory and filename to store the file to e.g. (/uploads/file.txt))")
+                    if "set" in command1:
+                        module1 = command1.replace("set", "")
+                        module = module1.replace(" ", "")
+                        if "target" in module:
+                            target = module.replace("target", "")
+                            print("target ==>", target)
+                        if "port" in module:
+                            port = module.replace("port", "")
+                            print("port ==>", port)
+                        if "file" in module:
+                            file0 = module.replace("file", "")
+                            print("file ==>", file0)
+                        if "directory" in module:
+                            directory = module.replace("directory", "")
+                            print("directory ==>", directory)
+                    if command1.startswith("execute") or command1.endswith("execute"):
+                        shell1 = "nmap -p" + port + " --script http-put --script-args http-put.url='" + directory + "',http-put.file='" + file0 + "'"
+                        try:
+                            print("[+] Running command:", shell1)
+                            subprocess.run(shell1, shell=True)
+                        except:
+                            print("There is some trouble...")
+                            print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                            print("Are you running this script on Linux?")
+                    if command1.startswith("back") or command1.endswith("back"):
+                        print("Exiting from module: upload")
+                        break
+        if command.startswith("back") or command.endswith("back"):
+            print("Exiting from module: nmap")
             break
 
 def nikto(): 
@@ -424,16 +740,12 @@ def wafw00f():
                 else:
                     print("The option verbose can be only yes or no")
         if command.startswith("execute") or command.endswith("execute"):
+            shell1 = "wafw00f "
             if verbose == True:
-                if listall == True:
-                    shell1 = "wafw00f -a -v " + domain
-                else:
-                    shell1 = "wafw00f -v " + domain
-            else:
-                if listall == True:
-                    shell1 = "wafw00f -a " + domain
-                else:
-                    shell1 = "wafw00f " + domain
+                shell1 += "-v "
+            if listall == True:
+                shell1 += "-a "
+            shell1 += domain
             try:
                 print("[+] Running command:", shell1)
                 subprocess.run(shell1, shell=True)
@@ -445,6 +757,47 @@ def wafw00f():
             print("Exiting from module: wafw00f")
             break
 
+def lbd():
+    print("You have chosen the module: lbd")
+    domain = ""
+    port = ""
+    while True:
+        command = str(input("#lbd>>>"))
+        if command.startswith("help") or command.endswith("help"):
+            print("Checks if a given domain uses load-balancer")
+            print()
+            print("\tCOMMAND            DESCRIPTION")
+            print("\thelp               Show this help message")
+            print("\tshow options       Show the options to set")
+            print("\tset <OPTION>       Set the value of the <OPTION>")
+            print("\texecute            Start the tool")
+            print("\tback               Go back to the main menu")
+        if command.startswith("show options") or command.endswith("show options"):
+            print("OPTIONS      REQUIRED    CURRENT VALUE")
+            print("domain       yes        ", domain)
+            print("port         no         ", port)
+        if "set" in command:
+            module1 = command.replace("set", "")
+            module = module1.replace(" ", "")
+            if "domain" in module:
+                domain = module.replace("domain", "")
+                print("domain ==>", domain)
+            if "port" in module:
+                port = module.replace("port", "")
+                print("port ==>", port)
+        if command.startswith("execute") or command.endswith("execute"):
+            shell1 = "lbd " + domain + " " + port
+            try:
+                print("[+] Running command:", shell1)
+                subprocess.run(shell1, shell=True)
+            except:
+                print("There is some trouble...")
+                print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                print("Are you running this script on Linux?")
+        if command.startswith("back") or command.endswith("back"):
+            print("Exiting from module: lbd")
+            break
+
 def weevely():
     print("You have chosen the module: weevely")
     while True:
@@ -452,6 +805,7 @@ def weevely():
         if command.startswith("help") or command.endswith("help"):
             print()
             print("This tool generate a webshell for website that use PHP.")
+            print()
             print("\tCOMMAND            DESCRIPTION")
             print("\thelp               Show this help message")
             print("\tshow modules       Show the modules")
@@ -588,16 +942,11 @@ def httrack():
                 else:
                     print("The option verbose can be only yes or no")
         if command.startswith("execute") or command.endswith("execute"):
+            shell1 = "httrack " + website + " "
+            if directory != "":
+                shell1 += directory
             if verbose == True:
-                if directory != "":
-                    shell1 = "httrack " + website + " " + directory + " -v"
-                else:
-                    shell1 = "httrack " + website + " -v"
-            else:
-                if directory != "":
-                    shell1 = "httrack " + website + " " + directory
-                else:
-                    shell1 = "httrack " + website
+                shell1 += " -v"
             try:
                 print("[+] Running command:", shell1)
                 subprocess.run(shell1, shell=True)
@@ -715,8 +1064,8 @@ def aircrack_ng():
                         print("\thelp               Show this help message")
                         print("\tshow options       Show the options to set")
                         print("\tset <OPTION>       Set the value of the <OPTION>")
-                        print("\tstart              Start the module")
-                        print("\tstop               Stop the module")
+                        print("\tstart              Start the module", "(press Ctr-C to stop)")
+                        print("\tstop               Stop the module", "(stops the monitor mode)")
                         print("\tback               Go back to the main menu")
                     if command1.startswith("show options") or command.endswith("show options"):
                         print("OPTIONS      REQUIRED    CURRENT VALUE")
@@ -765,7 +1114,7 @@ def aircrack_ng():
                     if command1.startswith("help") or command1.endswith("help"):
                         print("This module make a deauth attack")
                         print("Before you use this module you have to run, in another terminal, the module scan, and then write start")
-                        print("when you see your victim hit Ctrl-C and reenter in Automater reuse the module scan, and then write stop. This allows you to get what you need")
+                        print("when you see your victim hit Ctrl-C, and then write stop. This allows you to get what you need")
                         print()
                         print("\tCOMMAND            DESCRIPTION")
                         print("\thelp               Show this help message")
@@ -827,6 +1176,8 @@ while True:
         list_all()
     if "use" in command:
         use()
+    if command.startswith("ip") or command.endswith("ip"):
+        ip()
     if command.startswith("clear") or command.endswith("clear"):
         clear()
     if command.startswith("exit") or command.endswith("exit"):
