@@ -585,7 +585,7 @@ def nmap():
                             port = module.replace("port", "")
                             print("port ==>", port)
                     if command1.startswith("execute") or command1.endswith("execute"):
-                        shell1 = "nmap -p" + port + " --script http-fileupload-exploiter.nse " + target
+                        shell1 = "nmap -p" + port + " " + target + " --script http-fileupload-exploiter.nse " + target
                         try:
                             print("[+] Running command:", shell1)
                             subprocess.run(shell1, shell=True)
