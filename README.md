@@ -58,3 +58,11 @@ Version 2.1.0 (31/08/2020):
   added new tool: weevely
   
   moved "deauth" in the module "aircrack-ng" and added "scan"
+
+Version 2.2.0 (32/08/2020):
+  
+  added new tool: lbd
+  
+  added new tool: nmap
+  
+  added module for nmap: vulner, bypass, detect, file upload and upload
