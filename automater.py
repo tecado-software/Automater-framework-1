@@ -62,6 +62,7 @@ def help():
     print("list all             List all tool")
     print("use <MODULE>         Use the selected module")
     print("ip                   Get your internal and external ip address")
+    print("update               Update the tools")
     print("clear                Clear the screen")
     print("exit                 Exit the framework")
 
@@ -79,11 +80,49 @@ def list_all():
     print("\tlbd                Scan for Load Balancer")
     print("Website:")
     print("\tweevely            Generate and run webshell for website")
+    print("\twpscan             Find and exploit wordpress vulnerabilities")
     print("\thttrack            Clone a website")
+    print("Database:")
+    print("\tsqlmap              Detect and exploit sql injection")
     print("Password:")
     print("\thydra              Password cracker for most protocols")
     print("Wi-Fi:")
     print("\taircrack-ng        Tool from the aircrack-ng suite")
+
+def update():
+    welcome()
+    print("[+] Updating repository...")
+    subprocess.run("sudo apt update", shell=True)
+    print("[+] Updating metagoofil...")
+    subprocess.run("sudo apt install -y metagoofil", shell=True)
+    print("[+] Updating whois...")
+    subprocess.run("sudo apt install -y whois", shell=True)
+    print("[+] Updating deep magic...")
+    subprocess.run("sudo apt install -y dmitry")
+    print("[+] Updating hping3...")
+    subprocess.run("sudo apt install -y hping3", shell=True)
+    print("[+] Updating nmap...")
+    subprocess.run("sudo apt install -y nmap", shell=True)
+    print("[+] Updating nikto...")
+    subprocess.run("sudo apt install -y nikto", shell=True)
+    print("[+] Updating wafw00f...")
+    subprocess.run("sudo apt install -y wafw00f", shell=True)
+    print("[+] Updating lbd...")
+    subprocess.run("sudo apt install -y lbd", shell=True)
+    print("[+] Updating weevely...")
+    subprocess.run("sudo apt install -y weevely", shell=True)
+    print("[+] Updating wpscan...")
+    subprocess.run("sudo apt install -y wpscan", shell=True)
+    print("[+] Updating httrack...")
+    subprocess.run("sudo apt install -y httrack", shell=True)
+    print("[+] Updating sqlmap...")
+    subprocess.run("sudo apt install -y sqlmap", shell=True)
+    print("[+] Updating hydra...")
+    subprocess.run("sudo apt install -y hydra", shell=True)
+    print("[+] Updating aircrack-ng...")
+    subprocess.run("sudo apt install -y aircrack-ng", shell=True)
+    print("[+] Updating tor...")
+    subprocess.run("sudo apt install -y tor", shell=True)
 
 def clear():
     subprocess.run("clear", shell=True)
@@ -109,8 +148,12 @@ def use():
         lbd()
     if module == "weevely":
         weevely()
+    if module == "wpscan":
+        wpscan()
     if module == "httrack":
         httrack()
+    if module == "sqlmap":
+        sqlmap()
     if module == "hydra":
         hydra()
     if module == "aircrack-ng":
@@ -900,6 +943,147 @@ def weevely():
             print("Exiting from module: weevely")
             break
 
+def wpscan():
+    print("You have chosen the module: wpscan")
+    while True:
+        command = str(input("#wpscan>>>"))
+        if command.startswith("help") or command.endswith("help"):
+            print()
+            print("This tool find and exploit vulnerabilities of wordpress website and blog.")
+            print()
+            print("\tCOMMAND            DESCRIPTION")
+            print("\thelp               Show this help message")
+            print("\tshow modules       Show the modules")
+            print("\tuse <MODULE>       Use a module")
+            print("\tback               Go back to the main menu")
+        if command.startswith("show modules") or command.endswith("show modules"):
+            print("MODULE       DESCRIPTION")
+            print("scan         Scan for vulnerabilities")
+            print("usernameuse  user")
+            print("bruteforce   Bruteforce the user's password")
+        if "use" in command:
+            module = command.replace("use ", "")
+            if module == "scan":
+                print("You have chosen the module: scan")
+                url = ""
+                while True:
+                    command1 = str(input("#wpscan/scan>>>"))
+                    if command1.startswith("help") or command1.endswith("help"):
+                        print()
+                        print("\tCOMMAND            DESCRIPTION")
+                        print("\thelp               Show this help message")
+                        print("\tshow options       Show the options to set")
+                        print("\tset <OPTION>       Set the value of the <OPTION>")
+                        print("\texecute            start the module")
+                        print("\tback               Go back to the weevely menu")
+                    if command1.startswith("show options") or command1.endswith("show options"):
+                        print("OPTIONS      REQUIRED    CURRENT VALUE")
+                        print("url          yes        ", url)
+                    if "set" in command1:
+                        module1 = command1.replace("set", "")
+                        module = module1.replace(" ", "")
+                        if "url" in module:
+                            url = module.replace("url", "")
+                            print("url ==>", url)
+                    if command1.startswith("execute") or command1.endswith("execute"):
+                        shell1 = "wpscan --url " + url
+                        try:
+                            print("[+] Running command:", shell1)
+                            subprocess.run(shell1, shell=True)
+                        except:
+                            print("There is some trouble...")
+                            print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                            print("Are you running this script on Linux?")
+                    if command1.startswith("back") or command1.endswith("back"):
+                        print("Exiting from module: scan")
+                        break
+            if module == "username":
+                print("You have chosen the module: username")
+                url = ""
+                while True:
+                    command1 = str(input("#wpscan/username>>>"))
+                    if command1.startswith("help") or command1.endswith("help"):
+                        print()
+                        print("\tCOMMAND            DESCRIPTION")
+                        print("\thelp               Show this help message")
+                        print("\tshow options       Show the options to set")
+                        print("\tset <OPTION>       Set the value of the <OPTION>")
+                        print("\texecute            Start the module")
+                        print("\tback               Go back to the weevely menu")
+                    if command1.startswith("show options") or command1.endswith("show options"):
+                        print("OPTIONS      REQUIRED    CURRENT VALUE")
+                        print("url          yes        ", url)
+                    if "set" in command1:
+                        module1 = command1.replace("set", "")
+                        module = module1.replace(" ", "")
+                        if "url" in module:
+                            url = module.replace("url", "")
+                            print("url ==>", url)
+                    if command1.startswith("execute") or command.endswith("execute"):
+                        shell1 = "wpscan --url " + url + " --enumerate u"
+                        try:
+                            print("[+] Running command:", shell1)
+                            subprocess.run(shell1, shell=True)
+                        except:
+                            print("There is some trouble...")
+                            print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                            print("Are you running this script on Linux?")
+                    if command1.startswith("back") or command1.endswith("back"):
+                        print("Exiting from module: username")
+                        break
+            if module == "bruteforce":
+                print("You have chosen the module: bruteforce")
+                url = ""
+                wordlist = ""
+                username = ""
+                threads = ""
+                while True:
+                    command1 = str(input("#wpscan/bruteforce>>>"))
+                    if command1.startswith("help") or command1.endswith("help"):
+                        print()
+                        print("\tCOMMAND            DESCRIPTION")
+                        print("\thelp               Show this help message")
+                        print("\tshow options       Show the options to set")
+                        print("\tset <OPTION>       Set the value of the <OPTION>")
+                        print("\texecute            start the module")
+                        print("\tback               Go back to the weevely menu")
+                    if command1.startswith("show options") or command1.endswith("show options"):
+                        print("OPTIONS      REQUIRED    CURRENT VALUE")
+                        print("url          yes        ", url)
+                        print("wordlist     yes        ", wordlist)
+                        print("username     yes        ", username)
+                        print("threads      yes        ", threads)
+                    if "set" in command1:
+                        module1 = command1.replace("set", "")
+                        module = module1.replace(" ", "")
+                        if "url" in module:
+                            url = module.replace("url", "")
+                            print("url ==>", url)
+                        if "wordlist" in module:
+                            wordlist = module.replace("wordlist", "")
+                            print("wordlist ==>", wordlist)
+                        if "username" in module:
+                            username = module.replace("username", "")
+                            print("username ==>", username)
+                        if "threads" in module:
+                            threads = module.replace("threads", "")
+                            print("threads ==>", threads)
+                    if command1.startswith("execute") or command1.endswith("execute"):
+                        shell1 = "wpscan --url " + url + " --wordlist " + wordlist + " --username " + username + " --threads " + threads
+                        try:
+                            print("[+] Running command:", shell1)
+                            subprocess.run(shell1, shell=True)
+                        except:
+                            print("There is some trouble...")
+                            print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                            print("Are you running this script on Linux?")
+                    if command1.startswith("back") or command1.endswith("back"):
+                        print("Exiting from module: bruteforce")
+                        break
+        if command.startswith("back") or command.endswith("back"):
+            print("Exiting from module: wpscan")
+            break
+
 def httrack():
     print("You have chosen the module: httrack")
     website = ""
@@ -958,6 +1142,261 @@ def httrack():
             print("Exiting from module: httrack")
             break
 
+def sqlmap():
+    print("You have chosen the module: sqlmap")
+    while True:
+        command = str(input("#sqlmap>>>"))
+        if command.startswith("help") or command.endswith("help"):
+            print()
+            print("This tool detect and exploit sql vulnerabilities.")
+            print()
+            print("\tCOMMAND            DESCRIPTION")
+            print("\thelp               Show this help message")
+            print("\tshow modules       Show the modules")
+            print("\tuse <MODULE>       Use a module")
+            print("\tback               Go back to the main menu")
+        if command.startswith("show modules") or command.endswith("show modules"):
+            print("MODULE       DESCRIPTION")
+            print("check        Check for sql vulnerabilities")
+            print("database     Show all sql database")
+            print("table        Show all table of a given sql database")
+            print("dump         Dump the value from a given table")
+        if "use" in command:
+            module1 = command.replace("use", "")
+            module = module1.replace(" ", "")
+            if module == "check":
+                print("You have chosen the module: check")
+                url = ""
+                ttor = "no"
+                tor = False
+                while True:
+                    command1 = str(input("#sqlmap/check>>>"))
+                    if command1.startswith("help") or command1.endswith("help"):
+                        print()
+                        print("\tCOMMAND            DESCRIPTION")
+                        print("\thelp               Show this help message")
+                        print("\tshow options       Show the options to set")
+                        print("\tset <OPTION>       Set the value of the <OPTION>")
+                        print("\texecute            start the module")
+                        print("\tback               Go back to the weevely menu")
+                    if command1.startswith("show options") or command1.endswith("show options"):
+                        print("OPTIONS      REQUIRED    CURRENT VALUE")
+                        print("url          yes        ", url)
+                        print("tor          no         ", ttor)
+                    if "set" in command1:
+                        module1 = command1.replace("set", "")
+                        module = module1.replace(" ", "")
+                        if "url" in module:
+                            url = module.replace("url", "")
+                            print("url ==>", url)
+                        if "tor" in module:
+                            ttor = module.replace("tor", "")
+                            if ttor == "yes" or ttor == "no":
+                                print("tor ==>", ttor)
+                                if ttor == "yes":
+                                    tor = True
+                                else:
+                                    tor = False
+                            else:
+                                print("The option tor can be only yes or no")
+                    if command1.startswith("execute") or command1.endswith("execute"):
+                        shell1 = "sqlmap "
+                        if tor == True:
+                            shell1 += "--tor --tor-type=SOCKS5 -u " + url
+                        else:
+                            shell1 += "-u " + url
+                        try:
+                            if tor == True:
+                                print("[+] Running command: service tor start")
+                                subprocess.run("service tor start", shell=True)
+                            print("[+] Running command:", shell1)
+                            subprocess.run(shell1, shell=True)
+                        except:
+                            print("There is some trouble...")
+                            print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                            print("Are you running this script on Linux?")
+                    if command1.startswith("back") or command1.endswith("back"):
+                        print("Exiting from module: check")
+                        break
+            if module == "database":
+                print("You have chosen the module: database")
+                url = ""
+                ttor = "no"
+                tor = False
+                while True:
+                    command1 = str(input("#sqlmap/database>>>"))
+                    if command1.startswith("help") or command1.endswith("help"):
+                        print()
+                        print("\tCOMMAND            DESCRIPTION")
+                        print("\thelp               Show this help message")
+                        print("\tshow options       Show the options to set")
+                        print("\tset <OPTION>       Set the value of the <OPTION>")
+                        print("\texecute            start the module")
+                        print("\tback               Go back to the weevely menu")
+                    if command1.startswith("show options") or command1.endswith("show options"):
+                        print("OPTIONS      REQUIRED    CURRENT VALUE")
+                        print("url          yes        ", url)
+                        print("tor          no         ", ttor)
+                    if "set" in command1:
+                        module1 = command1.replace("set", "")
+                        module = module1.replace(" ", "")
+                        if "url" in module:
+                            url = module.replace("url", "")
+                            print("url ==>", url)
+                        if "tor" in module:
+                            ttor = module.replace("tor", "")
+                            if ttor == "yes" or ttor == "no":
+                                print("tor ==>", ttor)
+                                if ttor == "yes":
+                                    tor = True
+                                else:
+                                    tor = False
+                            else:
+                                print("The option tor can be only yes or no")
+                    if command1.startswith("execute") or command1.endswith("execute"):
+                        shell1 = "sqlmap "
+                        if tor == True:
+                            shell1 += "--tor --tor-type=SOCKS5 -u " + url + " --dbs"
+                        else:
+                            shell1 += "-u " + url + " --dbs"
+                        try:
+                            if tor == True:
+                                print("[+] Running command: service tor start")
+                                subprocess.run("service tor start", shell=True)
+                            print("[+] Running command:", shell1)
+                            subprocess.run(shell1, shell=True)
+                        except:
+                            print("There is some trouble...")
+                            print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                            print("Are you running this script on Linux?")
+                    if command1.startswith("back") or command1.endswith("back"):
+                        print("Exiting from module: database")
+                        break
+            if module == "table":
+                print("You have chosen the module: table")
+                url = ""
+                database = ""
+                ttor = "no"
+                tor = False
+                while True:
+                    command1 = str(input("#sqlmap/table>>>"))
+                    if command1.startswith("help") or command1.endswith("help"):
+                        print()
+                        print("\tCOMMAND            DESCRIPTION")
+                        print("\thelp               Show this help message")
+                        print("\tshow options       Show the options to set")
+                        print("\tset <OPTION>       Set the value of the <OPTION>")
+                        print("\texecute            start the module")
+                        print("\tback               Go back to the weevely menu")
+                    if command1.startswith("show options") or command1.endswith("show options"):
+                        print("OPTIONS      REQUIRED    CURRENT VALUE")
+                        print("url          yes        ", url)
+                        print("database     yes        ", database)
+                        print("tor          no         ", ttor)
+                    if "set" in command1:
+                        module = command1.replace("set ", "")
+                        if "url" in module:
+                            url = module.replace("url", "")
+                            print("url ==>", url)
+                        if "database" in module:
+                            database = module.replace("database", "")
+                            print("database ==>", database)
+                        if "tor" in module:
+                            ttor = module.replace("tor", "")
+                            if ttor == "yes" or ttor == "no":
+                                print("tor ==>", ttor)
+                                if ttor == "yes":
+                                    tor = True
+                                else:
+                                    tor = False
+                            else:
+                                print("The option tor can be only yes or no")
+                    if command1.startswith("execute") or command1.endswith("execute"):
+                        shell1 = "sqlmap "
+                        if tor == True:
+                            shell1 += "--tor --tor-type=SOCKS5 -u " + url + " -o --dbms MySql -D " + database + " --tables"
+                        else:
+                            shell1 += "-u " + url + " -o --dbms MySql -D " + database + " --tables"
+                        try:
+                            if tor == True:
+                                print("[+] Running command: service tor start")
+                                subprocess.run("service tor start", shell=True)
+                            print("[+] Running command:", shell1)
+                            subprocess.run(shell1, shell=True)
+                        except:
+                            print("There is some trouble...")
+                            print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                            print("Are you running this script on Linux?")
+                    if command1.startswith("back") or command1.endswith("back"):
+                        print("Exiting from module: table")
+                        break
+            if module == "dump":
+                print("You have chosen the module: dump")
+                url = ""
+                database = ""
+                table = ""
+                ttor = "no"
+                tor = False
+                while True:
+                    command1 = str(input("#sqlmap/dump>>>"))
+                    if command1.startswith("help") or command1.endswith("help"):
+                        print()
+                        print("\tCOMMAND            DESCRIPTION")
+                        print("\thelp               Show this help message")
+                        print("\tshow options       Show the options to set")
+                        print("\tset <OPTION>       Set the value of the <OPTION>")
+                        print("\texecute            start the module")
+                        print("\tback               Go back to the weevely menu")
+                    if command1.startswith("show options") or command1.endswith("show options"):
+                        print("OPTIONS      REQUIRED    CURRENT VALUE")
+                        print("url          yes        ", url)
+                        print("database     yes        ", database)
+                        print("table        yes        ", table)
+                        print("tor          no         ", ttor)
+                    if "set" in command1:
+                        module = command1.replace("set ", "")
+                        if "url" in module:
+                            url = module.replace("url", "")
+                            print("url ==>", url)
+                        if "database" in module:
+                            database = module.replace("database", "")
+                            print("database ==>", database)
+                        if "table" in module:
+                            table = module.replace("table", "")
+                            print("table ==>", table)
+                        if "tor" in module:
+                            ttor = module.replace("tor", "")
+                            if ttor == "yes" or ttor == "no":
+                                print("tor ==>", ttor)
+                                if ttor == "yes":
+                                    tor = True
+                                else:
+                                    tor = False
+                            else:
+                                print("The option tor can be only yes or no")
+                    if command1.startswith("execute") or command1.endswith("execute"):
+                        shell1 = "sqlmap "
+                        if tor == True:
+                            shell1 += "--tor --tor-type=SOCKS5 -u " + url + " -o --dbms MySql -D " + database + " -T " + table + "--columns --dump"
+                        else:
+                            shell1 += "-u " + url + " -o --dbms MySql -D " + database + " -T " + table + " --columns --dump"
+                        try:
+                            if tor == True:
+                                print("[+] Running command: service tor start")
+                                subprocess.run("service tor start", shell=True)
+                            print("[+] Running command:", shell1)
+                            subprocess.run(shell1, shell=True)
+                        except:
+                            print("There is some trouble...")
+                            print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                            print("Are you running this script on Linux?")
+                    if command1.startswith("back") or command1.endswith("back"):
+                        print("Exiting from module: dump")
+                        break
+        if command.startswith("back") or command.endswith("back"):
+            print("Exiting from module: sqlmap")
+            break
+        
 def hydra():
     print("You have chosen the module: hydra")
     protocol = ""
@@ -1178,6 +1617,8 @@ while True:
         use()
     if command.startswith("ip") or command.endswith("ip"):
         ip()
+    if command.startswith("update") or command.endswith("update"):
+        update()
     if command.startswith("clear") or command.endswith("clear"):
         clear()
     if command.startswith("exit") or command.endswith("exit"):
