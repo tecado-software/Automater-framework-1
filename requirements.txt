@@ -7,6 +7,9 @@ nikto
 wafw00f
 lbd
 weevely
+wpscan
 httrack
+sqlmap
 hydra
 aircrack-ng
+tor
