@@ -69,6 +69,8 @@ Version 2.2.0 (1/09/2020):
 
 Version 2.3.0 (5/10/2020):
 
+  Updater integrated in main script
+
   added new tool: sqlmap
   
   added new tool: wpscan
