@@ -74,3 +74,9 @@ Version 2.3.0 (5/10/2020):
   added new tool: sqlmap
   
   added new tool: wpscan
+
+Version 2.4.0 (20/10/2020):
+  
+  added new tool: cupp
+  
+  added new tool: kwetza
