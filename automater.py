@@ -1,5 +1,6 @@
 import subprocess
 import random
+import os
 
 def welcome():
     var = random.randint(0,4)
@@ -14,7 +15,7 @@ def welcome():
         frase = "\"Two things are infinite: the universe and human stupidity, but I still have doubts about the universe\""
         frase1 = "Albert Einstein"
     elif val == 3:
-        frase = "\"A computer il like air conditioning. It become useless when you open Windows\""
+        frase = "\"A computer is like air conditioning. It become useless when you open Windows\""
         frase1 = "Linus Torvalds"
     else:
         frase = "\"We have problems with our physical security, operational security through to management\""
@@ -23,7 +24,7 @@ def welcome():
         print("    _         _                        _            ")
         print("   / \  _   _| |_ ___  _ __ ___   __ _| |_ ___ _ __ ", frase)
         print("  / _ \| | | | __/ _ \| '_ ` _ \ / _` | __/ _ \ '__|", frase1)
-        print(" / ___ \ |_| | || (_) | | | | | | (_| | ||  __/ |    v.2.2.0")
+        print(" / ___ \ |_| | || (_) | | | | | | (_| | ||  __/ |    v.2.4.0")
         print("/_/   \_\__,_|\__\___/|_| |_| |_|\__,_|\__\___|_|    By @gasmat")
         print()
     if var == 1:
@@ -32,24 +33,24 @@ def welcome():
         print(" #   #  #    #   #   #    # ##  ##  #  #    #   #      #    # ")
         print("#     # #    #   #   #    # # ## # #    #   #   #####  #    # ", frase)
         print("####### #    #   #   #    # #    # ######   #   #      #####  ", frase1)
-        print("#     # #    #   #   #    # #    # #    #   #   #      #   #   v.2.2.0")
+        print("#     # #    #   #   #    # #    # #    #   #   #      #   #   v.2.4.0")
         print("#     #  ####    #    ####  #    # #    #   #   ###### #    #  By @gasmat")
     if var == 2:
         print("               _                        _            ")
         print("    /\        | |                      | |           ")
         print("   /  \  _   _| |_ ___  _ __ ___   __ _| |_ ___ _ __ ", frase)
         print("  / /\ \| | | | __/ _ \| '_ ` _ \ / _` | __/ _ \ '__|", frase1)
-        print(" / ____ \ |_| | || (_) | | | | | | (_| | ||  __/ |    v.2.2.0")
+        print(" / ____ \ |_| | || (_) | | | | | | (_| | ||  __/ |    v.2.4.0")
         print("/_/    \_\__,_|\__\___/|_| |_| |_|\__,_|\__\___|_|    By @gasmat")
     if var == 3:
         print("    \          |                         |            ", frase)
         print("   _ \   |   | __|  _ \  __ `__ \   _` | __|  _ \  __|",frase1)
-        print("  ___ \  |   | |   (   | |   |   | (   | |    __/ |    v.2.2.0")
-        print("_/    _\\__,_|\__|\___/ _|  _|  _|\__,_|\__|\___|_|    By @gasmat ")
+        print("  ___ \  |   | |   (   | |   |   | (   | |    __/ |    v.2.4.0")
+        print("_/    _\\\__,_|\__|\___/ _|  _|  _|\__,_|\__|\___|_|    By @gasmat ")
     if var == 4:
         print("   _       _                  _           ", frase)
         print("  /_\ _  _| |_ ___ _ __  __ _| |_ ___ _ _ ", frase1)
-        print(" / _ \ || |  _/ _ \ '  \/ _` |  _/ -_) '_| v.2.2.0")
+        print(" / _ \ || |  _/ _ \ '  \/ _` |  _/ -_) '_| v.2.4.0")
         print("/_/ \_\_,_|\__\___/_|_|_\__,_|\__\___|_|   By @gasmat")
 
 def help():
@@ -83,9 +84,12 @@ def list_all():
     print("\twpscan             Find and exploit wordpress vulnerabilities")
     print("\thttrack            Clone a website")
     print("Database:")
-    print("\tsqlmap              Detect and exploit sql injection")
+    print("\tsqlmap             Detect and exploit sql injection")
+    print("Exploit:")
+    print("\tkwetza             Infect an existing apk")
     print("Password:")
     print("\thydra              Password cracker for most protocols")
+    print("\tcupp               Generate password list")
     print("Wi-Fi:")
     print("\taircrack-ng        Tool from the aircrack-ng suite")
 
@@ -154,8 +158,12 @@ def use():
         httrack()
     if module == "sqlmap":
         sqlmap()
+    if module == "kwetza":
+        kwetza()
     if module == "hydra":
         hydra()
+    if module == "cupp":
+        cupp()
     if module == "aircrack-ng":
         aircrack_ng()
 
@@ -1396,7 +1404,78 @@ def sqlmap():
         if command.startswith("back") or command.endswith("back"):
             print("Exiting from module: sqlmap")
             break
-        
+
+def kwetza():
+    print("You have chosen the module: kwetza")
+    main = os.getcwd()
+    os.chdir("tools")
+    os.chdir("kwetza")
+    apk = ""
+    lhost = ""
+    lport = ""
+    mode = "https"
+    add = True
+    vadd = "yes"
+    while True:
+        command = str(input("#kwetza>>>"))
+        if command.startswith("help") or command.endswith("help"):
+            print("Infect an existing apk and exploit a phone")
+            print()
+            print("\tCOMMAND            DESCRIPTION")
+            print("\thelp               Show this help message")
+            print("\tshow options       Show the options to set")
+            print("\tset <OPTION>       Set the value of the <OPTION>")
+            print("\texecute            Start the tool")
+            print("\tback               Go back to the main menu")
+        if command.startswith("show options") or command.endswith("show options"):
+            print("OPTIONS      REQUIRED    CURRENT VALUE")
+            print("apk-path     yes        ", apk)
+            print("lhost        yes        ", lhost)
+            print("lport        yes        ", lport)
+            print("mode         no         ", mode)
+            print("add-evil     no         ", vadd)
+        if "set" in command:
+            module1 = command.replace("set", "")
+            module = module1.replace(" ", "")
+            if "apk-path" in module:
+                apk = module.replace("apk-path", "")
+                print("apk-path ==>", apk)
+            if "lhost" in module:
+                lhost = module.replace("lhost", "")
+                print("lhost ==>", lhost)
+            if "lport" in module:
+                lport = module.replace("lport", "")
+                print("lport ==>", lport)
+            if "mode" in module:
+                mode = module.replace("mode", "")
+                if mode == "https" or mode == "tcp":
+                    print("mode ==>", mode)
+                else:
+                    print("The option mode can be only https or tcp")
+                    mode = "https"
+            if "add" in module:
+                vadd = module.replace("verbose", "")
+                if vadd == "yes" or vadd == "no":
+                    print("add ==>", vadd)
+                    if vadd == "yes":
+                        add = True
+                    else:
+                        add = False
+                else:
+                    print("The option add can be only yes or no")
+        if command.startswith("execute") or command.endswith("execute"):
+            shell1 = "python kwetza.py " + apk + " " + mode + " " + lhost + " " + lport + " " + vadd 
+            try:
+                print("[+] Running command:", shell1)
+                subprocess.run(shell1, shell=True)
+            except:
+                print("There is some trouble...")
+                print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                print("Are you running this script on Linux?")
+        if command.startswith("back") or command.endswith("back"):
+            print("Exiting from module: kwetza")
+            break
+
 def hydra():
     print("You have chosen the module: hydra")
     protocol = ""
@@ -1467,6 +1546,83 @@ def hydra():
                 print("Are you running this script on Linux?")
         if command.startswith("back") or command.endswith("back"):
             print("Exiting from module: hydra")
+            break
+
+def cupp():
+    print("You have chosen the module: cupp")
+    main = os.getcwd()
+    os.chdir("tools")
+    os.chdir("cupp")
+    while True:
+        command = str(input("#cupp>>>"))
+        if command.startswith("help") or command.endswith("help"):
+            print()
+            print("Common User Password Profiler.")
+            print()
+            print("\tCOMMAND            DESCRIPTION")
+            print("\thelp               Show this help message")
+            print("\tshow modules       Show the modules")
+            print("\tuse <MODULE>       Use a module")
+            print("\tback               Go back to the main menu")
+        if command.startswith("show modules") or command.endswith("show modules"):
+            print("MODULE       DESCRIPTION")
+            print("default      download default usernames and password")
+            print("interactive  Generate password from name, surname, ecc...")
+        if "use" in command:
+            module1 = command.replace("use", "")
+            module = module1.replace(" ", "")
+            if module == "default":
+                print("You have chosen the module: default")
+                while True:
+                    command1 = str(input("#cupp/default>>>"))
+                    if command1.startswith("help") or command1.endswith("help"):
+                        print()
+                        print("\tCOMMAND            DESCRIPTION")
+                        print("\thelp               Show this help message")
+                        print("\texecute            start the module")
+                        print("\tback               Go back to the weevely menu")
+                    if command1.startswith("execute") or command1.endswith("execute"):
+                        shell1 = "python3 cupp.py -a"
+                        try:
+                            subprocess.run(shell1, shell=True)
+                        except:
+                            print("There is some trouble...")
+                            print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                            print("Are you running this script on Linux?")
+                        print("[+] The file are called: alectodb-passwords.txt, alectodb-usernames.txt and alectodb.csv.gz")
+                    if command1.startswith("back") or command1.endswith("back"):
+                        print("Exiting from module: default")
+                        break
+            if module == "interactive":
+                print("You have chosen the module: interactive")
+                url = ""
+                password = ""
+                while True:
+                    command1 = str(input("#cupp/interactive>>>"))
+                    if command1.startswith("help") or command1.endswith("help"):
+                        print()
+                        print("\tCOMMAND            DESCRIPTION")
+                        print("\thelp               Show this help message")
+                        print("\texecute            Start the module")
+                        print("\tback               Go back to the weevely menu")
+                    if command1.startswith("show options") or command1.endswith("show options"):
+                        print("OPTIONS      REQUIRED    CURRENT VALUE")
+                        print()
+                    if command1.startswith("execute") or command.endswith("execute"):
+                        shell1 = "python3 cupp.py -i"
+                        try:
+                            print("[+] Running command:", shell1)
+                            subprocess.run(shell1, shell=True)
+                        except:
+                            print("There is some trouble...")
+                            print("Did you install the dependency? (there is the installer if you are using a OS with use apt as package manager)")
+                            print("Are you running this script on Linux?")
+                    if command1.startswith("back") or command1.endswith("back"):
+                        print("Exiting from module: interactive")
+                        break
+        if command.startswith("back") or command.endswith("back"):
+            print("Exiting from module: cupp")
+            os.chdir(main)
             break
 
 def aircrack_ng():
