@@ -1,4 +1,7 @@
 # Automater
+
+![alt text](https://github.com/MattiaG-afk/Automater-framework/blob/master/Example/logo.png "Automater logo")
+
 A framework for newbie and lazy people
 
 # Installation:
